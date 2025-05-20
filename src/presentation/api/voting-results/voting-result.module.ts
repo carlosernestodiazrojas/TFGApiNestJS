@@ -1,0 +1,14 @@
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Hoa } from "src/infrastructure/entities/hoa.entity";
+import { JwtService } from "@nestjs/jwt";
+import { VotingResultController } from "./voting-result.controller";
+
+@Module({
+    imports: [TypeOrmModule.forFeature([Hoa])],
+    providers: [JwtService],
+    controllers: [VotingResultController]
+})
+export class VotingResultModule {
+
+}
