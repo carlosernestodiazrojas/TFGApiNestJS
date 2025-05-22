@@ -1,17 +1,7 @@
 
-export enum RoleName {
-    GLOBAL_ADMIN = 'global_admin',
-    ADMIN = 'administrador',
-    PRESIDENT = 'presidente',
-    OWNER = 'propietario',
-}
+import { RoleName } from "src/common/enums/role-name.enum";
 
-export class RoleModel {
-    constructor(id: string, code: number, name: RoleName) {
-        this.id = id
-        this.name = name
-        this.code = code
-    }
+export interface RoleModel {
     id: string;
     code: number;
     name: RoleName;
