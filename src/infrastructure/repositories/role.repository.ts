@@ -5,8 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Role } from '../../infrastructure/entities/role.entity';
 import { IRoleRepository } from 'src/domain/repositories/irole.repository';
-import { RoleModel } from 'src/domain/models/role.model';
-import { RoleName } from 'src/domain/models/role.model';
+import { RoleName } from 'src/common/enums/role-name.enum';
+import { RoleVM } from '../../common/vm/role.vm';
 
 @Injectable()
 export class RoleRepository implements IRoleRepository {
@@ -15,14 +15,14 @@ export class RoleRepository implements IRoleRepository {
         private readonly repo: Repository<Role>,
     ) { }
 
-    async findByName(name: RoleName): Promise<RoleModel | null> {
+    async findByName(name: RoleName): Promise<RoleVM | null> {
         const ent = await this.repo.findOne({ where: { name } });
         if (!ent) return null;
-        return new RoleModel(ent.id, ent.code, ent.name as RoleName);
+        return new RoleVM(ent.id, ent.code, ent.name as RoleName);
     }
 
-    async findAll(): Promise<RoleModel[]> {
+    async findAll(): Promise<RoleVM[]> {
         const ents = await this.repo.find();
-        return ents.map(e => new RoleModel(e.id, e.code, e.name as RoleName));
+        return ents.map(e => new RoleVM(e.id, e.code, e.name as RoleName));
     }
 }

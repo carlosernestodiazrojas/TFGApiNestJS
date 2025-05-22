@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, MinLength } from 'class-validator';
-import { RoleName } from 'src/domain/models/role.model';
+import { RoleName } from 'src/common/enums/role-name.enum';
 
 export class CreateUserDto {
     @IsEmail()

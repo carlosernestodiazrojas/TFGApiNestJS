@@ -10,7 +10,7 @@ import { CondominiumModule } from './presentation/api/condominiums/condominium.m
 import { PropertyModule } from './presentation/api/properties/property.module';
 import { AnnouncementModule } from './presentation/api/announcements/announcement.module';
 import { IncidenceModule } from './presentation/api/incidences/incidence.module';
-import { CommonAreaModule } from './presentation/api/common-area/common-area.module';
+import { CommonAreaModule } from './presentation/api/common-areas/common-area.module';
 import { HoaMeetingModule } from './presentation/api/hoa-meetings/hoa-meeting.module';
 import { MeetingSubjectModule } from './presentation/api/meeting-subjects/incidence.module';
 import { SpecialAssessmentModule } from './presentation/api/special-assessments/special-assessment.module';

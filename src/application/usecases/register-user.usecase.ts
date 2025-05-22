@@ -1,7 +1,7 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dtos/users/create-user.dto';
-import { RoleName } from 'src/domain/models/role.model';
+import { RoleName } from 'src/common/enums/role-name.enum';
 import { IUserRepository, IUserRepositoryToken } from 'src/domain/repositories/iuser.repository';
 import { IRoleRepository, IRoleRepositoryToken } from 'src/domain/repositories/irole.repository';
 

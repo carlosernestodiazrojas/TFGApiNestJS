@@ -7,7 +7,7 @@ import { RegisterUserUseCase } from '../../../application/usecases/register-user
 import { UpdateUserUseCase } from '../../../application/usecases/update-user.usecase';
 import { ChangePasswordUseCase } from '../../../application/usecases/change-password.usecase';
 import { UserRepository } from '../../../infrastructure/repositories/user.repository';
-import { RoleName } from 'src/domain/models/role.model';
+import { RoleName } from 'src/common/enums/role-name.enum';
 import { ChangePasswordDto } from 'src/application/dtos/users/change-password.dto';
 import { GetUserDto } from 'src/application/dtos/users/get-user.dto';
 

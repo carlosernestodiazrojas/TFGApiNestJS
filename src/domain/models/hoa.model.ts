@@ -1,12 +1,5 @@
-
-
-export class HoaModel {
-    constructor(id: string, name: string, address: string) {
-        this.id = id
-        this.name = name
-        this.address = address
-    }
+export interface HoaModel {
     id: string;
-    address: string;
     name: string;
+    address: string;
 }

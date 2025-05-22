@@ -7,9 +7,10 @@ import { User } from '../../infrastructure/entities/user.entity';
 import { IUserRepository } from 'src/domain/repositories/iuser.repository';
 import { CreateUserDto } from 'src/application/dtos/users/create-user.dto';
 import { UpdateUserDto } from 'src/application/dtos/users/update-user.dto';
-import { UserModel } from 'src/domain/models/user.model';
-import { RoleModel, RoleName } from 'src/domain/models/role.model';
+import { UserVM } from 'src/common/vm/user.vm';
 import { RoleRepository } from './role.repository';
+import { RoleName } from 'src/common/enums/role-name.enum';
+import { RoleVM } from 'src/common/vm/role.vm';
 
 @Injectable()
 
@@ -20,46 +21,47 @@ export class UserRepository implements IUserRepository {
         private readonly roleRepo: RoleRepository,
     ) { }
 
-    private toDomain(user: User): UserModel {
-        return new UserModel(
+    private toDomain(user: User): UserVM {
+        return new UserVM(
             user.id,
             user.email,
             user.password,
-            new RoleModel(user.role.id, user.role.code, user.role.name as RoleName),
+            new RoleVM(user.role.id, user.role.code, user.role.name as RoleName),
         );
     }
 
-    async findByEmail(email: string): Promise<UserModel | null> {
+    async findByEmail(email: string): Promise<UserVM | null> {
         const ent = await this.repo.findOne({ where: { email }, relations: ['role'] });
         return ent ? this.toDomain(ent) : null;
     }
 
-    async findById(id: string): Promise<UserModel | null> {
+    async findById(id: string): Promise<UserVM | null> {
         const ent = await this.repo.findOne({ where: { id }, relations: ['role'] });
         return ent ? this.toDomain(ent) : null;
     }
 
-    async findAll(): Promise<UserModel[]> {
+    async findAll(): Promise<UserVM[]> {
         const ents = await this.repo.find({ relations: ['role'] });
         return ents.map(e => this.toDomain(e));
     }
 
-    async create(dto: CreateUserDto): Promise<UserModel> {
-        // 1) Busca la entidad Role
+    async create(dto: CreateUserDto): Promise<UserVM> {
+
         const roleEnt = await this.roleRepo.findByName(dto.role);
         if (!roleEnt) throw new NotFoundException('Rol no encontrado');
-        // 2) Crea la entidad con la relación
+
         const ent = this.repo.create({
             email: dto.email,
             password: dto.password,
-            role: { id: roleEnt.id },  // solo hace falta el id para la FK
+            role: { id: roleEnt.id },
+
         });
-        // 3) Guarda y convierte a modelo de dominio
+
         const saved = await this.repo.save(ent);
         return this.toDomain(saved);
     }
 
-    async update(id: string, dto: UpdateUserDto): Promise<UserModel> {
+    async update(id: string, dto: UpdateUserDto): Promise<UserVM> {
 
         const user = await this.repo.findOne({ where: { id }, relations: ['role'] });
         if (!user) throw new NotFoundException('Usuario no encontrado');
