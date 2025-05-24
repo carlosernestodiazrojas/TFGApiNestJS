@@ -1,5 +1,3 @@
-
-
 export class AnnouncementVM {
     constructor(id: string, name: string, code: string) {
         this.id = id

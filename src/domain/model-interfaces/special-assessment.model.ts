@@ -5,8 +5,8 @@ export interface SpecialAssessmentModel {
     title: string;
     description: string;
     is_votable: boolean;
-    total_amount: boolean;
-    individual_amount: boolean;
+    total_amount: number;
+    individual_amount: number;
     is_approved: boolean;
     created_at: string;
     updated_at: string;

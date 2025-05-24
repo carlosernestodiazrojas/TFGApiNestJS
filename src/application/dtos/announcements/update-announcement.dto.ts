@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
-import { UpdateAnnouncementDtoInterface } from 'src/domain/dto-interfaces/announcements/update-announcement.dto-interface';
+import { UpdateAnnouncementDtoInterface } from 'src/domain/dto-interfaces/announcement/update-announcement.dto-interface';
 
 export class UpdateAnnouncementDto implements UpdateAnnouncementDtoInterface {
     @IsNotEmpty()
