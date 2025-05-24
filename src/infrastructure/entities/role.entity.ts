@@ -5,7 +5,7 @@ import { RoleModel } from 'src/domain/models/role.model';
 import { RoleName } from 'src/common/enums/role-name.enum';
 
 @Entity('roles')
-export class Role {
+export class Role implements RoleModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

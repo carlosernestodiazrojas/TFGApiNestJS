@@ -1,9 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Role } from './role.entity';
 import { VotingResult } from './voting_result.entity';
+import { UserModel } from 'src/domain/models/user.model';
 
 @Entity('users')
-export class User {
+export class User implements UserModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
