@@ -8,8 +8,8 @@ import { RoleRepository } from '../../../infrastructure/repositories/role.reposi
 import { RegisterUserUseCase } from '../../../application/usecases/register-user.usecase';
 import { UpdateUserUseCase } from '../../../application/usecases/update-user.usecase';
 import { ChangePasswordUseCase } from '../../../application/usecases/change-password.usecase';
-import { IRoleRepositoryToken } from 'src/domain/repositories/irole.repository';
-import { IUserRepositoryToken } from 'src/domain/repositories/iuser.repository';
+import { IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.repository-interface';
+import { IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Module({

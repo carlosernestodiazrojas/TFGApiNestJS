@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { MeetingSubject } from './meeting_subject.entity';
-import { HoaMeetingModel } from 'src/domain/models/hoa-meeting.model';
+import { HoaMeetingModel } from 'src/domain/model-interfaces/hoa-meeting.model';
 
 @Entity('hoa_meetings')
 export class HoaMeeting implements HoaMeetingModel {

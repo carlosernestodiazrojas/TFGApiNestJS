@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Role } from '../../infrastructure/entities/role.entity';
-import { IRoleRepository } from 'src/domain/repositories/irole.repository';
+import { IRoleRepository } from 'src/domain/repository-interfaces/irole.repository-interface';
 import { RoleName } from 'src/common/enums/role-name.enum';
 import { RoleVM } from '../../common/vm/role.vm';
 

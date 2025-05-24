@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Hoa } from './hoa.entity';
-import { AnnouncementModel } from 'src/domain/models/announcement.model';
+import { AnnouncementModel } from 'src/domain/model-interfaces/announcement.model';
 
 @Entity('announcements')
 export class Announcement implements AnnouncementModel {

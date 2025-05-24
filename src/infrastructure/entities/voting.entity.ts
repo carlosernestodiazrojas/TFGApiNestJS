@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { VotingResult } from './voting_result.entity';
-import { VotingModel } from 'src/domain/models/voting.model';
+import { VotingModel } from 'src/domain/model-interfaces/voting.model';
 
 @Entity('votings')
 export class Voting implements VotingModel {

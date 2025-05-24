@@ -5,7 +5,7 @@ import { User } from './user.entity';
 import { Incidence } from './incidence.entity';
 import { MeetingSubject } from './meeting_subject.entity';
 import { SpecialAssessment } from './special_assessment.entity';
-import { SubjectAssessmentModel } from 'src/domain/models/subject-assessment.model';
+import { SubjectAssessmentModel } from 'src/domain/model-interfaces/subject-assessment.model';
 
 @Entity('subject_assessments')
 export class SubjectAssessment implements SubjectAssessmentModel {

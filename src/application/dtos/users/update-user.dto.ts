@@ -1,7 +1,8 @@
 import { IsEmail, IsEnum, IsOptional, MinLength } from 'class-validator';
 import { RoleName } from 'src/common/enums/role-name.enum';
+import { UpdateUserDtoInterface } from 'src/domain/dto-interfaces/users/update-user.dto-interface';
 
-export class UpdateUserDto {
+export class UpdateUserDto implements UpdateUserDtoInterface {
     @IsOptional()
     @IsEmail()
     email?: string;

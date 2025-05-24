@@ -2,8 +2,8 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dtos/users/create-user.dto';
 import { RoleName } from 'src/common/enums/role-name.enum';
-import { IUserRepository, IUserRepositoryToken } from 'src/domain/repositories/iuser.repository';
-import { IRoleRepository, IRoleRepositoryToken } from 'src/domain/repositories/irole.repository';
+import { IUserRepository, IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
+import { IRoleRepository, IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.repository-interface';
 
 @Injectable()
 export class RegisterUserUseCase {

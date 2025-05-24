@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { HoaMeeting } from './hoa_meeting.entity';
 import { SubjectIncidence } from './subject_incidence.entity';
 import { SubjectAssessment } from './subject_assessment.entity';
-import { MeetingSubjectModel } from 'src/domain/models/meeting-subject.model';
+import { MeetingSubjectModel } from 'src/domain/model-interfaces/meeting-subject.model';
 
 @Entity('meeting_subjects')
 export class MeetingSubject implements MeetingSubjectModel {

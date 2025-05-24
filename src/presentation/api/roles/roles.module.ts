@@ -4,7 +4,7 @@ import { Role } from '../../../infrastructure/entities/role.entity';
 import { RolesController } from './roles.controller';
 import { JwtService } from '@nestjs/jwt';
 import { GetRolesUseCase } from 'src/application/usecases/roles/get-roles.usecase';
-import { IRoleRepositoryToken } from 'src/domain/repositories/irole.repository';
+import { IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.repository-interface';
 import { RoleRepository } from 'src/infrastructure/repositories/role.repository';
 
 @Module({

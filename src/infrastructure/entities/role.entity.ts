@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { User } from './user.entity';
-import { RoleModel } from 'src/domain/models/role.model';
+import { RoleModel } from 'src/domain/model-interfaces/role.model';
 
 import { RoleName } from 'src/common/enums/role-name.enum';
 
