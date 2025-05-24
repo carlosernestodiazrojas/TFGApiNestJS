@@ -1,7 +1,6 @@
 
 export interface VotingModel {
     id: string;
-
     title: string;
     description: string;
     voting_entity_type: string;
@@ -10,7 +9,6 @@ export interface VotingModel {
     started_at: string;
     is_finished: boolean;
     finished_at: string;
-
     created_at: string;
     updated_at: string;
     is_deleted: boolean;

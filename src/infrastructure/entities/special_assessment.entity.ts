@@ -18,10 +18,10 @@ export class SpecialAssessment implements SpecialAssessmentModel {
     is_votable: boolean;
 
     @Column('decimal', { precision: 10, scale: 2, default: 0 })
-    total_amount: boolean;
+    total_amount: number;
 
     @Column('decimal', { precision: 10, scale: 2, default: 0 })
-    individual_amount: boolean;
+    individual_amount: number;
 
     @Column({ type: 'boolean' })
     is_approved: boolean;
