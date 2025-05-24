@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Incidence } from './incidence.entity';
 import { Condominium } from './condominium.entity';
-import { CommonArea } from './common_area.entity';
 import { Announcement } from './announcement.entity';
 import { SpecialAssessment } from './special_assessment.entity';
 import { HoaMeeting } from './hoa_meeting.entity';
+import { HoaModel } from 'src/domain/models/hoa.model';
 
 @Entity('hoas')
-export class Hoa {
+export class Hoa implements HoaModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

@@ -1,5 +1,5 @@
 
-export interface VotingResultModel {
+export interface VotingModel {
     id: string;
 
     title: string;

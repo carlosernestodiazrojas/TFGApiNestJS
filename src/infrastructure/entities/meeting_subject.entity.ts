@@ -1,14 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
-import { Hoa } from './hoa.entity';
-import { Condominium } from './condominium.entity';
 import { HoaMeeting } from './hoa_meeting.entity';
-import { Incidence } from './incidence.entity';
-import { SpecialAssessment } from './special_assessment.entity';
 import { SubjectIncidence } from './subject_incidence.entity';
 import { SubjectAssessment } from './subject_assessment.entity';
+import { MeetingSubjectModel } from 'src/domain/models/meeting-subject.model';
 
 @Entity('meeting_subjects')
-export class MeetingSubject {
+export class MeetingSubject implements MeetingSubjectModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

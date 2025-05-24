@@ -1,3 +1,5 @@
+import { UserModel } from "./user.model";
+import { VotingModel } from "./voting.model";
 
 export interface VotingResultModel {
     id: string;
@@ -6,7 +8,7 @@ export interface VotingResultModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    voting_id: string
-    user_id: string
+    voting: VotingModel
+    user: UserModel
 
 }

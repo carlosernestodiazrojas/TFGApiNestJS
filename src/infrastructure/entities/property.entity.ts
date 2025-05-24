@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Hoa } from './hoa.entity';
 import { Condominium } from './condominium.entity';
+import { PropertyModel } from 'src/domain/models/property.model';
 
 @Entity('properties')
-export class Property {
+export class Property implements PropertyModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -25,6 +25,5 @@ export class Property {
     @ManyToOne(() => Condominium, condominium => condominium.properties)
     @JoinColumn({ name: 'condominium_id' })
     condominium: Condominium;
-
 
 }

@@ -1,3 +1,4 @@
+import { HoaModel } from "./hoa.model";
 
 export interface IncidenceModel {
     id: string;
@@ -10,5 +11,5 @@ export interface IncidenceModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    hoa_id: string
+    hoa: HoaModel
 }

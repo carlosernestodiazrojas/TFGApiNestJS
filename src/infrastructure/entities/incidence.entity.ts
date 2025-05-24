@@ -1,9 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { SubjectIncidence } from './subject_incidence.entity';
+import { IncidenceModel } from 'src/domain/models/incidence.model';
 
 @Entity('incidences')
-export class Incidence {
+export class Incidence implements IncidenceModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

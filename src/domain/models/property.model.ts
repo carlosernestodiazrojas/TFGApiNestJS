@@ -1,3 +1,4 @@
+import { CondominiumModel } from "./condominium.model";
 
 export interface PropertyModel {
     id: string;
@@ -6,5 +7,5 @@ export interface PropertyModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    condominium_id: string;
+    condominium: CondominiumModel;
 }
