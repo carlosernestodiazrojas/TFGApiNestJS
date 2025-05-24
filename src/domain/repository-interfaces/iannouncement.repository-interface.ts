@@ -1,0 +1,13 @@
+import { AnnouncementVM } from 'src/common/vm/announcement.vm';
+import { CreateAnnouncementDtoInterface } from '../dto-interfaces/announcements/create-announcement.dto-interface';
+import { UpdateAnnouncementDtoInterface } from '../dto-interfaces/announcements/update-announcement.dto-interface';
+
+export const IAnnouncementRepositoryToken = 'IAnnouncementRepository';
+
+export interface IAnnouncementRepository {
+    findByEmail(email: string): Promise<AnnouncementVM | null>;
+    findById(id: string): Promise<AnnouncementVM | null>;
+    findAll(): Promise<AnnouncementVM[]>;
+    create(dto: CreateAnnouncementDtoInterface): Promise<AnnouncementVM>;
+    update(id: string, dto: UpdateAnnouncementDtoInterface): Promise<AnnouncementVM>;
+}

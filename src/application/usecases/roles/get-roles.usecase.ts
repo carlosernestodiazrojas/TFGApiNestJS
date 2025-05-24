@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { IRoleRepository, IRoleRepositoryToken } from "src/domain/repositories/irole.repository";
+import { IRoleRepository, IRoleRepositoryToken } from "src/domain/repository-interfaces/irole.repository-interface";
 
 @Injectable()
 export class GetRolesUseCase {

@@ -15,8 +15,8 @@ import { LoginDto } from 'src/application/dtos/users/login.dto';
 import { LoginUseCase } from 'src/application/usecases/login/login.usecase';
 import { RegisterUserUseCase } from 'src/application/usecases/register-user.usecase';
 
-import { IUserRepositoryToken } from 'src/domain/repositories/iuser.repository';
-import { IRoleRepositoryToken } from 'src/domain/repositories/irole.repository';
+import { IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
+import { IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.repository-interface';
 
 import { JwtStrategy } from 'src/common/strategies/jwt.strategy';
 import { jwtConstants } from 'src/common/strategies/constants';

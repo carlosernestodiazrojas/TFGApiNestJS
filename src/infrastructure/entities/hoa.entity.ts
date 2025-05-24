@@ -4,7 +4,7 @@ import { Condominium } from './condominium.entity';
 import { Announcement } from './announcement.entity';
 import { SpecialAssessment } from './special_assessment.entity';
 import { HoaMeeting } from './hoa_meeting.entity';
-import { HoaModel } from 'src/domain/models/hoa.model';
+import { HoaModel } from 'src/domain/model-interfaces/hoa.model';
 
 @Entity('hoas')
 export class Hoa implements HoaModel {

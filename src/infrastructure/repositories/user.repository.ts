@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { User } from '../../infrastructure/entities/user.entity';
-import { IUserRepository } from 'src/domain/repositories/iuser.repository';
+import { IUserRepository } from 'src/domain/repository-interfaces/iuser.repository-interface';
 import { CreateUserDto } from 'src/application/dtos/users/create-user.dto';
 import { UpdateUserDto } from 'src/application/dtos/users/update-user.dto';
 import { UserVM } from 'src/common/vm/user.vm';
@@ -21,7 +21,7 @@ export class UserRepository implements IUserRepository {
         private readonly roleRepo: RoleRepository,
     ) { }
 
-    private toDomain(user: User): UserVM {
+    private toViewModel(user: User): UserVM {
         return new UserVM(
             user.id,
             user.email,
@@ -32,17 +32,17 @@ export class UserRepository implements IUserRepository {
 
     async findByEmail(email: string): Promise<UserVM | null> {
         const ent = await this.repo.findOne({ where: { email }, relations: ['role'] });
-        return ent ? this.toDomain(ent) : null;
+        return ent ? this.toViewModel(ent) : null;
     }
 
     async findById(id: string): Promise<UserVM | null> {
         const ent = await this.repo.findOne({ where: { id }, relations: ['role'] });
-        return ent ? this.toDomain(ent) : null;
+        return ent ? this.toViewModel(ent) : null;
     }
 
     async findAll(): Promise<UserVM[]> {
         const ents = await this.repo.find({ relations: ['role'] });
-        return ents.map(e => this.toDomain(e));
+        return ents.map(e => this.toViewModel(e));
     }
 
     async create(dto: CreateUserDto): Promise<UserVM> {
@@ -58,7 +58,7 @@ export class UserRepository implements IUserRepository {
         });
 
         const saved = await this.repo.save(ent);
-        return this.toDomain(saved);
+        return this.toViewModel(saved);
     }
 
     async update(id: string, dto: UpdateUserDto): Promise<UserVM> {
@@ -81,6 +81,6 @@ export class UserRepository implements IUserRepository {
             await this.repo.update(id, dto as any);
 
         const updated = await this.repo.findOne({ where: { id }, relations: ['role'] });
-        return this.toDomain(updated as User);
+        return this.toViewModel(updated as User);
     }
 }

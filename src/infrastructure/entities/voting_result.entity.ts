@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { Hoa } from './hoa.entity';
 import { Voting } from './voting.entity';
 import { User } from './user.entity';
-import { VotingResultModel } from 'src/domain/models/voting-result.model';
+import { VotingResultModel } from 'src/domain/model-interfaces/voting-result.model';
 
 @Entity('voting_results')
 export class VotingResult implements VotingResultModel {

@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { Condominium } from './condominium.entity';
-import { CommonAreaModel } from 'src/domain/models/common-area-model';
+import { CommonAreaModel } from 'src/domain/model-interfaces/common-area-model';
 
 @Entity('common_areas')
 export class CommonArea implements CommonAreaModel {

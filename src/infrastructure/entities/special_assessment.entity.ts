@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { SubjectAssessment } from './subject_assessment.entity';
-import { SpecialAssessmentModel } from 'src/domain/models/special-assessment.model';
+import { SpecialAssessmentModel } from 'src/domain/model-interfaces/special-assessment.model';
 
 @Entity('special_assessments')
 export class SpecialAssessment implements SpecialAssessmentModel {

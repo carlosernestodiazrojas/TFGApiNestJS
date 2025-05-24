@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Condominium } from './condominium.entity';
-import { PropertyModel } from 'src/domain/models/property.model';
+import { PropertyModel } from 'src/domain/model-interfaces/property.model';
 
 @Entity('properties')
 export class Property implements PropertyModel {
