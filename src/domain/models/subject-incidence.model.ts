@@ -1,8 +1,10 @@
+import { IncidenceModel } from "./incidence.model";
+import { MeetingSubjectModel } from "./meeting-subject.model";
 
-export interface SubjectAssessmentModel {
+export interface SubjectIncidenceModel {
     id: string;
-    incidence_id: string
-    meeting_subject_id: string
+    incidence: IncidenceModel
+    subject: MeetingSubjectModel
     created_at: string;
     updated_at: string;
     is_deleted: boolean;

@@ -1,3 +1,4 @@
+import { HoaModel } from "./hoa.model";
 
 export interface SpecialAssessmentModel {
     id: string;
@@ -11,5 +12,5 @@ export interface SpecialAssessmentModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    hoa_id: string;
+    hoa: HoaModel;
 }

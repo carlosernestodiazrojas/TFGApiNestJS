@@ -4,9 +4,10 @@ import { Voting } from './voting.entity';
 import { User } from './user.entity';
 import { Incidence } from './incidence.entity';
 import { MeetingSubject } from './meeting_subject.entity';
+import { SubjectIncidenceModel } from 'src/domain/models/subject-incidence.model';
 
 @Entity('subject_incidences')
-export class SubjectIncidence {
+export class SubjectIncidence implements SubjectIncidenceModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

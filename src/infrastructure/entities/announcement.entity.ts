@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Hoa } from './hoa.entity';
+import { AnnouncementModel } from 'src/domain/models/announcement.model';
 
 @Entity('announcements')
-export class Announcement {
+export class Announcement implements AnnouncementModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

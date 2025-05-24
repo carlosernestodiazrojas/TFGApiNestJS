@@ -1,4 +1,4 @@
-
+import { HoaModel } from "./hoa.model";
 
 export interface AnnouncementModel {
     id: string;
@@ -8,5 +8,5 @@ export interface AnnouncementModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    hoa_id: string;
+    hoa: HoaModel;
 }

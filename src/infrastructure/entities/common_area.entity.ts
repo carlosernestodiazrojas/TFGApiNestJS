@@ -1,9 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { Condominium } from './condominium.entity';
+import { CommonAreaModel } from 'src/domain/models/common-area-model';
 
 @Entity('common_areas')
-export class CommonArea {
+export class CommonArea implements CommonAreaModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -34,6 +35,5 @@ export class CommonArea {
     @ManyToOne(() => Condominium, condominium => condominium.common_areas)
     @JoinColumn({ name: 'condominium_id' })
     condominium: Condominium;
-
 
 }

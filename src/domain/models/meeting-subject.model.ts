@@ -1,3 +1,4 @@
+import { HoaMeetingModel } from "./hoa-meeting.model";
 
 export interface MeetingSubjectModel {
     id: string;
@@ -7,5 +8,5 @@ export interface MeetingSubjectModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    meeting_id: string
+    meeting: HoaMeetingModel
 }

@@ -1,3 +1,4 @@
+import { CondominiumModel } from "./condominium.model";
 
 export interface CommonAreaModel {
     id: string;
@@ -9,5 +10,5 @@ export interface CommonAreaModel {
     updated_at: string;
     is_deleted: boolean;
     deleted_at: string;
-    condominium_id: string;
+    condominium: CondominiumModel;
 }

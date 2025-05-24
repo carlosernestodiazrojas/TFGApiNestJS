@@ -1,8 +1,10 @@
+import { MeetingSubjectModel } from "./meeting-subject.model";
+import { SpecialAssessmentModel } from "./special-assessment.model";
 
 export interface SubjectAssessmentModel {
     id: string;
-    special_assessment_id: string
-    meeting_subject_id: string
+    assessment: SpecialAssessmentModel
+    subject: MeetingSubjectModel
     created_at: string;
     updated_at: string;
     is_deleted: boolean;

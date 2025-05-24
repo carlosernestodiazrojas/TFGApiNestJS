@@ -4,7 +4,7 @@ import { CommonArea } from './common_area.entity';
 import { Property } from './property.entity';
 
 @Entity('condominiums')
-export class Condominium {
+export class Condominium implements Condominium {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -38,6 +38,5 @@ export class Condominium {
 
     @OneToMany(() => Property, property => property.condominium)
     properties: Property[];
-
 
 }
