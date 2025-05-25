@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany, IsNull } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { SubjectIncidence } from './subject_incidence.entity';
 import { IncidenceModel } from 'src/domain/model-interfaces/incidence.model';
@@ -20,7 +20,7 @@ export class Incidence implements IncidenceModel {
     @Column({ type: 'boolean' })
     is_solved: boolean;
 
-    @Column({ type: 'timestamp without time zone' })
+    @Column({ type: 'timestamp without time zone', nullable: true })
     solved_at: string;
 
     @CreateDateColumn()
