@@ -1,5 +1,5 @@
 export interface UpdateCondominiumDtoInterface {
-    name: string;
-    description: string;
-    address: string;
+    name?: string;
+    description?: string;
+    address?: string;
 }
