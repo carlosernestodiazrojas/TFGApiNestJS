@@ -5,9 +5,8 @@ import { UpdateSpecialAssessmentDtoInterface } from '../dto-interfaces/special-a
 export const ISpecialAssessmentRepositoryToken = 'ISpecialAssessmentRepository';
 
 export interface ISpecialAssessmentRepository {
-    findByEmail(email: string): Promise<SpecialAssessmentVM | null>;
     findById(id: string): Promise<SpecialAssessmentVM | null>;
-    findAll(): Promise<SpecialAssessmentVM[]>;
+    findAll(hoa_id: string): Promise<SpecialAssessmentVM[]>;
     create(dto: CreateSpecialAssessmentDtoInterface): Promise<SpecialAssessmentVM>;
     update(id: string, dto: UpdateSpecialAssessmentDtoInterface): Promise<SpecialAssessmentVM>;
     delete(id: string): Promise<void>;

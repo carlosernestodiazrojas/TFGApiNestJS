@@ -12,7 +12,7 @@ import { Condominium } from 'src/infrastructure/entities/condominium.entity';
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata';
 import { CommonArea } from 'src/infrastructure/entities/common_area.entity';
 import { Announcement } from 'src/infrastructure/entities/announcement.entity';
-import { SpecialAssessment } from 'src/infrastructure/entities/special_assessment.entity';
+import { SpecialAssessment } from 'src/infrastructure/entities/special-assessment.entity';
 import { HoaMeeting } from 'src/infrastructure/entities/hoa_meeting.entity';
 import { Property } from 'src/infrastructure/entities/property.entity';
 import { MeetingSubject } from 'src/infrastructure/entities/meeting_subject.entity';

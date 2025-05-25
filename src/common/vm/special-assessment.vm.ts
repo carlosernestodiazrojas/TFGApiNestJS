@@ -7,8 +7,7 @@ export class SpecialAssessmentVM {
         total_amount: number,
         individual_amount: number,
         is_approved: boolean,
-        is_deleted: boolean,
-        hoa_id: string
+        is_deleted: boolean
     ) {
         this.id = id
         this.title = title
@@ -18,7 +17,6 @@ export class SpecialAssessmentVM {
         this.individual_amount = individual_amount
         this.is_approved = is_approved
         this.is_deleted = is_deleted
-        this.hoa_id = hoa_id
     }
     id: string;
     title: string;
@@ -28,5 +26,4 @@ export class SpecialAssessmentVM {
     individual_amount: number;
     is_approved: boolean;
     is_deleted: boolean;
-    hoa_id: string;
 }
