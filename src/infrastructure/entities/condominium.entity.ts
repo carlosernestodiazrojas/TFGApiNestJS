@@ -29,7 +29,7 @@ export class Condominium implements Condominium {
     @DeleteDateColumn()
     deleted_at: string;
 
-    @ManyToOne(() => Hoa, hoa => hoa.incidences)
+    @ManyToOne(() => Hoa, hoa => hoa.condominiums)
     @JoinColumn({ name: 'hoa_id' })
     hoa: Hoa;
 

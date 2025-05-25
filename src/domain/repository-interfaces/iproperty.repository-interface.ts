@@ -5,9 +5,8 @@ import { UpdatePropertyDtoInterface } from '../dto-interfaces/property/update-pr
 export const IPropertyRepositoryToken = 'IPropertyRepository';
 
 export interface IPropertyRepository {
-    findByEmail(email: string): Promise<PropertyVM | null>;
     findById(id: string): Promise<PropertyVM | null>;
-    findAll(): Promise<PropertyVM[]>;
+    findAll(condominium_id: string): Promise<PropertyVM[]>;
     create(dto: CreatePropertyDtoInterface): Promise<PropertyVM>;
     update(id: string, dto: UpdatePropertyDtoInterface): Promise<PropertyVM>;
     delete(id: string): Promise<void>;
