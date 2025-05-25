@@ -5,9 +5,8 @@ import { UpdateHoaMeetingDtoInterface } from '../dto-interfaces/hoa-meeting/upda
 export const IHoaMeetingRepositoryToken = 'IHoaMeetingRepository';
 
 export interface IHoaMeetingRepository {
-    findByEmail(email: string): Promise<HoaMeetingVM | null>;
     findById(id: string): Promise<HoaMeetingVM | null>;
-    findAll(): Promise<HoaMeetingVM[]>;
+    findAll(hoa_id: string): Promise<HoaMeetingVM[]>;
     create(dto: CreateHoaMeetingDtoInterface): Promise<HoaMeetingVM>;
     update(id: string, dto: UpdateHoaMeetingDtoInterface): Promise<HoaMeetingVM>;
     delete(id: string): Promise<void>;
