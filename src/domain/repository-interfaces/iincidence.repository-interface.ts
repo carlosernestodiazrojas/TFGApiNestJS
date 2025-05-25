@@ -5,9 +5,8 @@ import { UpdateIncidenceDtoInterface } from '../dto-interfaces/incidence/update-
 export const IIncidenceRepositoryToken = 'IIncidenceRepository';
 
 export interface IIncidenceRepository {
-    findByEmail(email: string): Promise<IncidenceVM | null>;
     findById(id: string): Promise<IncidenceVM | null>;
-    findAll(): Promise<IncidenceVM[]>;
+    findAll(hoa_id: string): Promise<IncidenceVM[]>;
     create(dto: CreateIncidenceDtoInterface): Promise<IncidenceVM>;
     update(id: string, dto: UpdateIncidenceDtoInterface): Promise<IncidenceVM>;
     delete(id: string): Promise<void>;
