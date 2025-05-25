@@ -1,10 +1,10 @@
 export class HoaVM {
-    constructor(id: string, title: string, description: string) {
+    constructor(id: string, name: string, address: string) {
         this.id = id
-        this.title = title
-        this.description = description
+        this.name = name
+        this.address = address
     }
     id: string;
-    title: string;
-    description: string;
+    name: string;
+    address: string;
 }

@@ -5,9 +5,8 @@ import { UpdateCondominiumDtoInterface } from '../dto-interfaces/condominium/upd
 export const ICondominiumRepositoryToken = 'ICondominiumRepository';
 
 export interface ICondominiumRepository {
-    findByEmail(email: string): Promise<CondominiumVM | null>;
     findById(id: string): Promise<CondominiumVM | null>;
-    findAll(): Promise<CondominiumVM[]>;
+    findAll(hoa_id: string): Promise<CondominiumVM[]>;
     create(dto: CreateCondominiumDtoInterface): Promise<CondominiumVM>;
     update(id: string, dto: UpdateCondominiumDtoInterface): Promise<CondominiumVM>;
     delete(id: string): Promise<void>;
