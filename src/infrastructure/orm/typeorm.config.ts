@@ -21,7 +21,6 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: (config: ConfigService) => {
-    console.log('DB_HOST=', config.get('DB_HOST'));
     return {
       type: 'postgres',
       host: config.get<string>('DB_HOST'),

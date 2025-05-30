@@ -12,6 +12,12 @@ export class UpdateUserDto implements UpdateUserDtoInterface {
     password?: string;
 
     @IsOptional()
+    name?: string;
+
+    @IsOptional()
+    last_name?: string;
+
+    @IsOptional()
     @IsEnum(RoleName)
     role?: RoleName;
 }

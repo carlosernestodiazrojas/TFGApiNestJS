@@ -11,6 +11,8 @@ import { UserVM } from 'src/common/vm/user.vm';
 import { RoleRepository } from './role.repository';
 import { RoleName } from 'src/common/enums/role-name.enum';
 import { RoleVM } from 'src/common/vm/role.vm';
+import { HoaVM } from 'src/common/vm/hoa.vm';
+import { HoaRepository } from './hoa.repository';
 
 @Injectable()
 
@@ -19,6 +21,7 @@ export class UserRepository implements IUserRepository {
         @InjectRepository(User)
         private readonly repo: Repository<User>,
         private readonly roleRepo: RoleRepository,
+        private readonly hoaRepo: HoaRepository,
     ) { }
 
     private toViewModel(user: User): UserVM {
@@ -26,22 +29,25 @@ export class UserRepository implements IUserRepository {
             user.id,
             user.email,
             user.password,
+            user.name,
+            user.last_name,
             new RoleVM(user.role.id, user.role.code, user.role.name as RoleName),
+            user.hoa ? new HoaVM(user.hoa.id, user.hoa.name, user.hoa.address) : null
         );
     }
 
     async findByEmail(email: string): Promise<UserVM | null> {
-        const ent = await this.repo.findOne({ where: { email }, relations: ['role'] });
+        const ent = await this.repo.findOne({ where: { email }, relations: ['role', 'hoa'] });
         return ent ? this.toViewModel(ent) : null;
     }
 
     async findById(id: string): Promise<UserVM | null> {
-        const ent = await this.repo.findOne({ where: { id }, relations: ['role'] });
+        const ent = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
         return ent ? this.toViewModel(ent) : null;
     }
 
     async findAll(): Promise<UserVM[]> {
-        const ents = await this.repo.find({ relations: ['role'] });
+        const ents = await this.repo.find({ relations: ['role', 'hoa'] });
         return ents.map(e => this.toViewModel(e));
     }
 
@@ -50,11 +56,16 @@ export class UserRepository implements IUserRepository {
         const roleEnt = await this.roleRepo.findByName(dto.role);
         if (!roleEnt) throw new NotFoundException('Rol no encontrado');
 
+        const hoaEnt = await this.hoaRepo.findById(dto.hoa_id);
+        if (!hoaEnt) throw new NotFoundException('Comunidad no encontrada');
+
         const ent = this.repo.create({
             email: dto.email,
             password: dto.password,
+            name: dto.name,
+            last_name: dto.last_name,
             role: { id: roleEnt.id },
-
+            hoa: { id: hoaEnt.id }
         });
 
         const saved = await this.repo.save(ent);
@@ -63,7 +74,7 @@ export class UserRepository implements IUserRepository {
 
     async update(id: string, dto: UpdateUserDto): Promise<UserVM> {
 
-        const user = await this.repo.findOne({ where: { id }, relations: ['role'] });
+        const user = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
         if (!user) throw new NotFoundException('Usuario no encontrado');
 
         if (dto.role) {
@@ -77,10 +88,10 @@ export class UserRepository implements IUserRepository {
                 .set(roleEnt.id);
         }
 
-        if (dto.email || dto.password)
+        if (dto.email || dto.password || dto.name || dto.last_name)
             await this.repo.update(id, dto as any);
 
-        const updated = await this.repo.findOne({ where: { id }, relations: ['role'] });
+        const updated = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
         return this.toViewModel(updated as User);
     }
 }

@@ -21,27 +21,32 @@ import { IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.rep
 import { JwtStrategy } from 'src/common/strategies/jwt.strategy';
 import { jwtConstants } from 'src/common/strategies/constants';
 import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Hoa } from 'src/infrastructure/entities/hoa.entity';
+import { HoaRepository } from 'src/infrastructure/repositories/hoa.repository';
+import { IHoaRepositoryToken } from 'src/domain/repository-interfaces/ihoa.repository-interface';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([User, Role]),
+        TypeOrmModule.forFeature([User, Role, Hoa]),
         PassportModule.register({ defaultStrategy: 'jwt' }),
 
         JwtModule.register({
             secret: jwtConstants.secret,
-            signOptions: { expiresIn: '1h' },
+            signOptions: { expiresIn: '24h' },
         }),
     ],
     providers: [
 
         UserRepository,
         RoleRepository,
+        HoaRepository,
         AuthService,
         LoginDto,
         LoginUseCase,
         RegisterUserUseCase,
         { provide: IUserRepositoryToken, useClass: UserRepository },
         { provide: IRoleRepositoryToken, useClass: RoleRepository },
+        { provide: IHoaRepositoryToken, useClass: HoaRepository },
 
         JwtStrategy,
         RolesGuard

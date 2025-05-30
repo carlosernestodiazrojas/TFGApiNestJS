@@ -11,16 +11,34 @@ import { ChangePasswordUseCase } from '../../../application/usecases/change-pass
 import { IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.repository-interface';
 import { IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
 import { JwtService } from '@nestjs/jwt';
+import { IHoaMeetingRepositoryToken } from 'src/domain/repository-interfaces/ihoa-meeting.repository-interface';
+import { HoaRepository } from 'src/infrastructure/repositories/hoa.repository';
+import { Hoa } from 'src/infrastructure/entities/hoa.entity';
+import { IHoaRepositoryToken } from 'src/domain/repository-interfaces/ihoa.repository-interface';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User, Role])],
+    imports: [TypeOrmModule.forFeature([User, Role, Hoa])],
     controllers: [UsersController],
-    providers: [UserRepository, RoleRepository, RegisterUserUseCase, UpdateUserUseCase, ChangePasswordUseCase, {
-        provide: IRoleRepositoryToken,
-        useClass: RoleRepository,
-    }, {
+    providers: [
+        UserRepository,
+        RoleRepository,
+        HoaRepository,
+        RegisterUserUseCase,
+        UpdateUserUseCase,
+        ChangePasswordUseCase,
+        {
+            provide: IRoleRepositoryToken,
+            useClass: RoleRepository,
+        },
+        {
             provide: IUserRepositoryToken,
             useClass: UserRepository,
-        }, JwtService],
+        },
+        {
+            provide: IHoaRepositoryToken,
+            useClass: HoaRepository,
+        },
+        JwtService
+    ],
 })
 export class UsersModule { }
