@@ -21,6 +21,7 @@ import { VotingResult } from 'src/infrastructure/entities/voting_result.entity';
 import { SubjectAssessment } from 'src/infrastructure/entities/subject_assessment.entity';
 import { SubjectIncidence } from 'src/infrastructure/entities/subject_incidence.entity';
 import { FileEntity } from 'src/infrastructure/entities/file.entity';
+import { FileRelation } from 'src/infrastructure/entities/file_relations.entity';
 
 export default new DataSource({
   type: 'postgres',
@@ -45,7 +46,8 @@ export default new DataSource({
     VotingResult,
     SubjectAssessment,
     SubjectIncidence,
-    FileEntity
+    FileEntity,
+    FileRelation
   ],
   synchronize: true,
   migrations: ['src/migrations/*.ts'],
