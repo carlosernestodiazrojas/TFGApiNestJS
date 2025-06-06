@@ -16,6 +16,7 @@ import { Voting } from 'src/infrastructure/entities/voting.entity';
 import { VotingResult } from 'src/infrastructure/entities/voting_result.entity';
 import { SubjectAssessment } from 'src/infrastructure/entities/subject_assessment.entity';
 import { SubjectIncidence } from 'src/infrastructure/entities/subject_incidence.entity';
+import { FileEntity } from '../entities/file.entity';
 
 export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
@@ -43,7 +44,8 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
         Voting,
         VotingResult,
         SubjectAssessment,
-        SubjectIncidence
+        SubjectIncidence,
+        FileEntity
       ],
       synchronize: true,
     };

@@ -18,6 +18,7 @@ import { SubjectAssessmentModule } from './presentation/api/subject-assessments/
 import { SubjectIncidenceModule } from './presentation/api/subject-incidences/subject-incidence.module';
 import { VotingModule } from './presentation/api/votings/voting.module';
 import { VotingResultModule } from './presentation/api/voting-results/voting-result.module';
+import { FileModule } from './presentation/api/upload/file.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { VotingResultModule } from './presentation/api/voting-results/voting-res
     SubjectAssessmentModule,
     SubjectIncidenceModule,
     VotingModule,
-    VotingResultModule
+    VotingResultModule,
+    FileModule
   ],
 })
 export class AppModule { }
