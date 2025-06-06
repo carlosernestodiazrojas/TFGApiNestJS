@@ -1,5 +1,6 @@
 import { FileModel } from 'src/domain/model-interfaces/file.model';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import { FileRelation } from './file_relations.entity';
 
 @Entity('files')
 export class FileEntity implements FileModel {
@@ -26,4 +27,8 @@ export class FileEntity implements FileModel {
 
     @CreateDateColumn()
     created_at: string;
+
+    @OneToMany(() => FileRelation, entity => entity.file)
+    entities: FileRelation[];
+
 }

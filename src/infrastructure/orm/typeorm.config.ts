@@ -13,10 +13,11 @@ import { HoaMeeting } from 'src/infrastructure/entities/hoa_meeting.entity';
 import { Property } from 'src/infrastructure/entities/property.entity';
 import { MeetingSubject } from 'src/infrastructure/entities/meeting_subject.entity';
 import { Voting } from 'src/infrastructure/entities/voting.entity';
-import { VotingResult } from 'src/infrastructure/entities/voting_result.entity';
+import { VotingResult } from '../entities/voting_result.entity';
 import { SubjectAssessment } from 'src/infrastructure/entities/subject_assessment.entity';
 import { SubjectIncidence } from 'src/infrastructure/entities/subject_incidence.entity';
 import { FileEntity } from '../entities/file.entity';
+import { FileRelation } from '../entities/file_relations.entity';
 
 export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
@@ -45,7 +46,8 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
         VotingResult,
         SubjectAssessment,
         SubjectIncidence,
-        FileEntity
+        FileEntity,
+        FileRelation
       ],
       synchronize: true,
     };
