@@ -13,9 +13,15 @@ import { IHoaRepositoryToken } from "src/domain/repository-interfaces/ihoa.repos
 import { HoaRepository } from "src/infrastructure/repositories/hoa.repository";
 import { HoaManagementUseCase } from "src/application/usecases/hoa/hoa-management.usecase";
 import { Condominium } from "src/infrastructure/entities/condominium.entity";
+import { IFileRelationRepositoryToken } from "src/domain/repository-interfaces/ifile-relation.repository-interface";
+import { FileRelationRepository } from "src/infrastructure/repositories/file-relation.repository";
+import { FileEntity } from "src/infrastructure/entities/file.entity";
+import { FileRelation } from "src/infrastructure/entities/file_relations.entity";
+import { FileService } from "src/application/services/upload/file.service";
+import { S3Service } from "src/application/services/upload/s3.service";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Condominium, Hoa])],
+    imports: [TypeOrmModule.forFeature([Condominium, Hoa, FileEntity, FileRelation])],
     providers: [
         JwtService,
         RolesGuard,
@@ -25,8 +31,13 @@ import { Condominium } from "src/infrastructure/entities/condominium.entity";
             provide: ICondominiumRepositoryToken,
             useClass: CondominiumRepository,
         },
-
+        {
+            provide: IFileRelationRepositoryToken,
+            useClass: FileRelationRepository,
+        },
         CondominiumManagementUseCase,
+        FileService,
+        S3Service
     ],
     controllers: [CondominiumController]
 })
