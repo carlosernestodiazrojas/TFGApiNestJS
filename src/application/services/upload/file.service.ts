@@ -55,6 +55,7 @@ export class FileService {
     }
 
     async getPresignedUrlById(id: string) {
+
         const file = await this.fileRepo.findOne({ where: { id } });
         if (!file) throw new NotFoundException('Archivo no encontrado');
 
