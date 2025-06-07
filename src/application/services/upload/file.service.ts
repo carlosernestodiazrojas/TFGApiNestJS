@@ -54,4 +54,20 @@ export class FileService {
         };
     }
 
+    async getPresignedUrlById(id: string) {
+        const file = await this.fileRepo.findOne({ where: { id } });
+        if (!file) throw new NotFoundException('Archivo no encontrado');
+
+        const key = `${file.sha256}.${file.extension}`;
+
+        const presignedUrl = await this.s3Service.getPresignedUrl(key, /*expiresIn=*/ 600);
+
+
+        return {
+            url: presignedUrl,
+            mimetype: file.mimetype,
+            originalName: file.originalName,
+        };
+    }
+
 }

@@ -6,6 +6,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import { Readable } from 'stream';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 @Injectable()
 export class S3Service {
@@ -43,6 +44,15 @@ export class S3Service {
         const command = new GetObjectCommand({ Bucket: bucket, Key: key });
         const response = await this.s3.send(command);
         return response.Body as Readable;
+    }
+
+    async getPresignedUrl(key: string, expiresIn = 600): Promise<string> {
+        const bucket = process.env.MINIO_BUCKET as string;
+        const command = new GetObjectCommand({ Bucket: bucket, Key: key });
+
+        const signedUrl = await getSignedUrl(this.s3, command, { expiresIn });
+
+        return signedUrl;
     }
 
 }

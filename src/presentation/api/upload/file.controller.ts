@@ -35,4 +35,9 @@ export class FileController {
         stream.pipe(res);
     }
 
+    @Get(':id/url')
+    async url(@Param('id') id: string) {
+        return await this.fileService.getPresignedUrlById(id);
+    }
+
 }
