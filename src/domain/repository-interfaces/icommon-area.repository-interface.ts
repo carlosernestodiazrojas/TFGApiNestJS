@@ -5,9 +5,8 @@ import { UpdateCommonAreaDtoInterface } from '../dto-interfaces/common-area/upda
 export const ICommonAreaRepositoryToken = 'ICommonAreaRepository';
 
 export interface ICommonAreaRepository {
-    findByEmail(email: string): Promise<CommonAreaVM | null>;
     findById(id: string): Promise<CommonAreaVM | null>;
-    findAll(): Promise<CommonAreaVM[]>;
+    findAll(condominium_id: string): Promise<CommonAreaVM[]>;
     create(dto: CreateCommonAreaDtoInterface): Promise<CommonAreaVM>;
     update(id: string, dto: UpdateCommonAreaDtoInterface): Promise<CommonAreaVM>;
     delete(id: string): Promise<void>;
