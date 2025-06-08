@@ -21,7 +21,11 @@ export class CondominiumPropertyRepository implements IPropertyRepository {
         return new PropertyVM(
             property.id,
             property.property_identifier,
-            property.is_deleted
+            property.is_deleted,
+            property.property_type,
+            property.has_storage_room,
+            property.has_parking_space,
+            property.current_on_payments
         );
     }
 
@@ -39,6 +43,7 @@ export class CondominiumPropertyRepository implements IPropertyRepository {
         const ents = await this.repo.find({
             where: { condominium: { id: condominium.id } },
             relations: ['condominium'],
+            order: { created_at: 'ASC' }
         });
 
         return ents.map(e => this.toViewModel(e));
@@ -54,6 +59,10 @@ export class CondominiumPropertyRepository implements IPropertyRepository {
         const ent = this.repo.create({
             property_identifier: dto.property_identifier,
             is_deleted: false,
+            current_on_payments: dto.current_on_payments,
+            has_parking_space: dto.has_parking_space,
+            has_storage_room: dto.has_storage_room,
+            property_type: dto.property_type,
             condominium
         });
 
@@ -68,6 +77,18 @@ export class CondominiumPropertyRepository implements IPropertyRepository {
 
         if (dto.property_identifier)
             property.property_identifier = dto.property_identifier
+
+        if (dto.property_type)
+            property.property_type = dto.property_type
+
+        if (dto.has_parking_space !== null)
+            property.has_parking_space = dto.has_parking_space
+
+        if (dto.has_storage_room !== null)
+            property.has_storage_room = dto.has_storage_room
+
+        if (dto.current_on_payments !== null)
+            property.current_on_payments = dto.current_on_payments
 
         await this.repo.save(property);
 
