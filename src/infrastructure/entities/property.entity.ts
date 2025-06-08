@@ -22,6 +22,18 @@ export class Property implements PropertyModel {
     @DeleteDateColumn()
     deleted_at: string;
 
+    @Column({ type: 'varchar', default: 'interior' })
+    property_type: string;
+
+    @Column({ type: 'boolean', default: true })
+    has_storage_room: boolean;
+
+    @Column({ type: 'boolean', default: true })
+    has_parking_space: boolean;
+
+    @Column({ type: 'boolean', default: true })
+    current_on_payments: boolean;
+
     @ManyToOne(() => Condominium, condominium => condominium.properties)
     @JoinColumn({ name: 'condominium_id' })
     condominium: Condominium;
