@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateIncidenceDto } from 'src/application/dtos/incidences/create-incidence.dto';
-import { UpdateIncidenceDto } from 'src/application/dtos/incidences/update-incidence.dto';
-
-import { IIncidenceRepository, IIncidenceRepositoryToken } from 'src/domain/repository-interfaces/iincidence.repository-interface';
+import { IIncidenceRepository, IIncidenceRepositoryToken } from 'src/application/repository-interfaces/iincidence.repository-interface';
+import { IUpdateIncidenceDto } from 'src/application/dto-interfaces/incidence/update-incidence.dto-interface';
+import { ICreateIncidenceDto } from 'src/application/dto-interfaces/incidence/create-incidence.dto-interface';
 
 @Injectable()
 export class IncidenceManagementUseCase {
@@ -12,11 +11,11 @@ export class IncidenceManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateIncidenceDto) {
+    async create(dto: ICreateIncidenceDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateIncidenceDto) {
+    async update(id: string, dto: IUpdateIncidenceDto) {
         return await this.repo.update(id, dto);
     }
 

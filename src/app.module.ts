@@ -1,24 +1,24 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { typeOrmConfig } from './infrastructure/orm/typeorm.config';
-import { AuthModule } from './presentation/api/auth/auth.module';
-import { UsersModule } from './presentation/api/users/users.module';
-import { RolesModule } from './presentation/api/roles/roles.module';
-import { HoaModule } from './presentation/api/hoas/hoa.module';
-import { CondominiumModule } from './presentation/api/condominiums/condominium.module';
-import { PropertyModule } from './presentation/api/properties/property.module';
-import { AnnouncementModule } from './presentation/api/announcements/announcement.module';
-import { IncidenceModule } from './presentation/api/incidences/incidence.module';
-import { CommonAreaModule } from './presentation/api/common-areas/common-area.module';
-import { HoaMeetingModule } from './presentation/api/hoa-meetings/hoa-meeting.module';
-import { MeetingSubjectModule } from './presentation/api/meeting-subjects/incidence.module';
-import { SpecialAssessmentModule } from './presentation/api/special-assessments/special-assessment.module';
-import { SubjectAssessmentModule } from './presentation/api/subject-assessments/subject-assessment.module';
-import { SubjectIncidenceModule } from './presentation/api/subject-incidences/subject-incidence.module';
-import { VotingModule } from './presentation/api/votings/voting.module';
-import { VotingResultModule } from './presentation/api/voting-results/voting-result.module';
-import { FileModule } from './presentation/api/upload/file.module';
+import { typeOrmConfig } from './adapters/orm/typeorm.config';
+import { AuthModule } from './infrastructure/api/auth/auth.module';
+import { UsersModule } from './infrastructure/api/users/users.module';
+import { RolesModule } from './infrastructure/api/roles/roles.module';
+import { HoaModule } from './infrastructure/api/hoas/hoa.module';
+import { CondominiumModule } from './infrastructure/api/condominiums/condominium.module';
+import { PropertyModule } from './infrastructure/api/properties/property.module';
+import { AnnouncementModule } from './infrastructure/api/announcements/announcement.module';
+import { IncidenceModule } from './infrastructure/api/incidences/incidence.module';
+import { CommonAreaModule } from './infrastructure/api/common-areas/common-area.module';
+import { HoaMeetingModule } from './infrastructure/api/hoa-meetings/hoa-meeting.module';
+import { MeetingSubjectModule } from './infrastructure/api/meeting-subjects/incidence.module';
+import { SpecialAssessmentModule } from './infrastructure/api/special-assessments/special-assessment.module';
+import { SubjectAssessmentModule } from './infrastructure/api/subject-assessments/subject-assessment.module';
+import { SubjectIncidenceModule } from './infrastructure/api/subject-incidences/subject-incidence.module';
+import { VotingModule } from './infrastructure/api/votings/voting.module';
+import { VotingResultModule } from './infrastructure/api/voting-results/voting-result.module';
+import { FileModule } from './infrastructure/api/upload/file.module';
 
 @Module({
   imports: [

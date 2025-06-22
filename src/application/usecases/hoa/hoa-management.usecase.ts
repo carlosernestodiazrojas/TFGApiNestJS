@@ -1,10 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateHoaDto } from 'src/application/dtos/hoas/create-hoa.dto';
-import { UpdateHoaDto } from 'src/application/dtos/hoas/update-hoa.dto';
-import { IFileEntityRepositoryToken } from 'src/domain/repository-interfaces/ifile-entity.repository-interface';
-import { IFileRelationRepository, IFileRelationRepositoryToken } from 'src/domain/repository-interfaces/ifile-relation.repository-interface';
-
-import { IHoaRepository, IHoaRepositoryToken } from 'src/domain/repository-interfaces/ihoa.repository-interface';
+import { IFileRelationRepository, IFileRelationRepositoryToken } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
+import { IHoaRepository, IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.repository-interface';
+import { ICreateHoaDto } from 'src/application/dto-interfaces/hoa/create-hoa.dto-interface';
+import { IUpdateHoaDto } from 'src/application/dto-interfaces/hoa/update-hoa.dto-interface';
 
 @Injectable()
 export class HoaManagementUseCase {
@@ -16,11 +14,11 @@ export class HoaManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateHoaDto) {
+    async create(dto: ICreateHoaDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateHoaDto) {
+    async update(id: string, dto: IUpdateHoaDto) {
         return await this.repo.update(id, dto);
     }
 

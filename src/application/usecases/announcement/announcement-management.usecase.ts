@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateAnnouncementDto } from 'src/application/dtos/announcements/create-announcement.dto';
-import { UpdateAnnouncementDto } from 'src/application/dtos/announcements/update-announcement.dto';
-
-import { IAnnouncementRepository, IAnnouncementRepositoryToken } from 'src/domain/repository-interfaces/iannouncement.repository-interface';
+import { IAnnouncementRepository, IAnnouncementRepositoryToken } from 'src/application/repository-interfaces/iannouncement.repository-interface';
+import { ICreateAnnouncementDto } from 'src/application/dto-interfaces/announcement/create-announcement.dto-interface';
+import { IUpdateAnnouncementDto } from 'src/application/dto-interfaces/announcement/update-announcement.dto-interface';
 
 @Injectable()
 export class AnnouncementManagementUseCase {
@@ -12,11 +11,11 @@ export class AnnouncementManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateAnnouncementDto) {
+    async create(dto: ICreateAnnouncementDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateAnnouncementDto) {
+    async update(id: string, dto: IUpdateAnnouncementDto) {
         return await this.repo.update(id, dto);
     }
 

@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateHoaMeetingDto } from 'src/application/dtos/hoa-meetings/create-hoa-meeting.dto';
-import { UpdateHoaMeetingDto } from 'src/application/dtos/hoa-meetings/update-hoa-meeting.dto';
-
-import { IHoaMeetingRepository, IHoaMeetingRepositoryToken } from 'src/domain/repository-interfaces/ihoa-meeting.repository-interface';
+import { IHoaMeetingRepository, IHoaMeetingRepositoryToken } from 'src/application/repository-interfaces/ihoa-meeting.repository-interface';
+import { ICreateHoaMeetingDto } from 'src/application/dto-interfaces/hoa-meeting/create-meeting.dto-interface';
+import { IUpdateHoaMeetingDto } from 'src/application/dto-interfaces/hoa-meeting/update-meeting.dto-interface';
 
 @Injectable()
 export class HoaMeetingManagementUseCase {
@@ -12,11 +11,11 @@ export class HoaMeetingManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateHoaMeetingDto) {
+    async create(dto: ICreateHoaMeetingDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateHoaMeetingDto) {
+    async update(id: string, dto: IUpdateHoaMeetingDto) {
         return await this.repo.update(id, dto);
     }
 

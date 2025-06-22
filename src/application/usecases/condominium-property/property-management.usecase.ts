@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateCondominiumPropertyDto } from 'src/application/dtos/condominium-properties/create-condominium-property.dto';
-import { UpdateCondominiumPropertyDto } from 'src/application/dtos/condominium-properties/update-condominium-property.dto';
-
-import { IPropertyRepositoryToken, IPropertyRepository } from 'src/domain/repository-interfaces/iproperty.repository-interface';
+import { IPropertyRepositoryToken, IPropertyRepository } from 'src/application/repository-interfaces/iproperty.repository-interface';
+import { ICreatePropertyDto } from 'src/application/dto-interfaces/property/create-property.dto-interface';
+import { IUpdatePropertyDto } from 'src/application/dto-interfaces/property/update-property.dto-interface';
 
 @Injectable()
 export class CondominiumPropertyManagementUseCase {
@@ -12,11 +11,11 @@ export class CondominiumPropertyManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateCondominiumPropertyDto) {
+    async create(dto: ICreatePropertyDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateCondominiumPropertyDto) {
+    async update(id: string, dto: IUpdatePropertyDto) {
         return await this.repo.update(id, dto);
     }
 

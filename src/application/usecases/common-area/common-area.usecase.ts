@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateCommonAreaDtoInterface } from 'src/domain/dto-interfaces/common-area/create-common-area.dto-interface';
-import { UpdateCommonAreaDtoInterface } from 'src/domain/dto-interfaces/common-area/update-common-area.dto-interface';
-import { ICommonAreaRepository, ICommonAreaRepositoryToken } from 'src/domain/repository-interfaces/icommon-area.repository-interface';
+import { ICreateCommonAreaDto } from 'src/application/dto-interfaces/common-area/create-common-area.dto-interface';
+import { IUpdateCommonAreaDto } from 'src/application/dto-interfaces/common-area/update-common-area.dto-interface';
+import { ICommonAreaRepository, ICommonAreaRepositoryToken } from 'src/application/repository-interfaces/icommon-area.repository-interface';
 
 @Injectable()
 export class CommonAreaManagementUseCase {
@@ -11,11 +11,11 @@ export class CommonAreaManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateCommonAreaDtoInterface) {
+    async create(dto: ICreateCommonAreaDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateCommonAreaDtoInterface) {
+    async update(id: string, dto: IUpdateCommonAreaDto) {
         return await this.repo.update(id, dto);
     }
 
