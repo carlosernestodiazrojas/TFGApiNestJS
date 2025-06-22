@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateSpecialAssessmentDto } from 'src/application/dtos/special-assessments/create-special-assessment.dto';
-import { UpdateSpecialAssessmentDto } from 'src/application/dtos/special-assessments/update-special-assessment.dto';
-
-import { ISpecialAssessmentRepository, ISpecialAssessmentRepositoryToken } from 'src/domain/repository-interfaces/ispecial-assessment.repository-interface';
+import { ISpecialAssessmentRepository, ISpecialAssessmentRepositoryToken } from 'src/application/repository-interfaces/ispecial-assessment.repository-interface';
+import { ICreateSpecialAssessmentDto } from 'src/application/dto-interfaces/special-assessments/create-assessment.dto-interface';
+import { IUpdateSpecialAssessmentDto } from 'src/application/dto-interfaces/special-assessments/update-assessment.dto-interface';
 
 @Injectable()
 export class SpecialAssessmentManagementUseCase {
@@ -12,11 +11,11 @@ export class SpecialAssessmentManagementUseCase {
     ) { }
 
 
-    async create(dto: CreateSpecialAssessmentDto) {
+    async create(dto: ICreateSpecialAssessmentDto) {
         return await this.repo.create(dto);
     }
 
-    async update(id: string, dto: UpdateSpecialAssessmentDto) {
+    async update(id: string, dto: IUpdateSpecialAssessmentDto) {
         return await this.repo.update(id, dto);
     }
 

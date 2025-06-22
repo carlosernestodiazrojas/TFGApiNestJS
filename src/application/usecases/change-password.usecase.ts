@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { IUserRepository, IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
+import { IUserRepository, IUserRepositoryToken } from 'src/application/repository-interfaces/iuser.repository-interface';
 
 @Injectable()
 export class ChangePasswordUseCase {

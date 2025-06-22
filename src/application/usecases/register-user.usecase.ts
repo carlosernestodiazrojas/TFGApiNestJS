@@ -1,10 +1,10 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from '../dtos/users/create-user.dto';
 import { RoleName } from 'src/common/enums/role-name.enum';
-import { IUserRepository, IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
-import { IRoleRepository, IRoleRepositoryToken } from 'src/domain/repository-interfaces/irole.repository-interface';
-import { IHoaRepository, IHoaRepositoryToken } from 'src/domain/repository-interfaces/ihoa.repository-interface';
+import { IUserRepository, IUserRepositoryToken } from 'src/application/repository-interfaces/iuser.repository-interface';
+import { IRoleRepository, IRoleRepositoryToken } from 'src/application/repository-interfaces/irole.repository-interface';
+import { IHoaRepository, IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.repository-interface';
+import { ICreateUserDto } from '../dto-interfaces/users/create-user.dto-interface';
 
 @Injectable()
 export class RegisterUserUseCase {
@@ -17,7 +17,7 @@ export class RegisterUserUseCase {
         private hoaRepo: IHoaRepository,
     ) { }
 
-    async execute(dto: CreateUserDto) {
+    async execute(dto: ICreateUserDto) {
         const exists = await this.userRepo.findByEmail(dto.email);
         if (exists) throw new BadRequestException('Email ya registrado');
         const roleEntity = await this.roleRepo.findByName(dto.role);

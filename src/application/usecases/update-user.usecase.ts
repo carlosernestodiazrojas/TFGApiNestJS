@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { UpdateUserDto } from '../dtos/users/update-user.dto';
 import * as bcrypt from 'bcrypt';
-import { IUserRepository, IUserRepositoryToken } from 'src/domain/repository-interfaces/iuser.repository-interface';
+import { IUserRepository, IUserRepositoryToken } from 'src/application/repository-interfaces/iuser.repository-interface';
+import { IUpdateUserDto } from '../dto-interfaces/users/update-user.dto-interface';
 
 @Injectable()
 export class UpdateUserUseCase {
@@ -10,7 +10,7 @@ export class UpdateUserUseCase {
         private userRepo: IUserRepository
     ) { }
 
-    async execute(id: string, dto: UpdateUserDto) {
+    async execute(id: string, dto: IUpdateUserDto) {
         if (dto.password) dto.password = await bcrypt.hash(dto.password, 10);
         await this.userRepo.update(id, dto);
         return this.userRepo.findById(id);

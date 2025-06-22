@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FileEntity } from 'src/infrastructure/entities/file.entity';
+import { FileEntity } from 'src/adapters/entities/file.entity';
 import { Repository } from 'typeorm';
 import { S3Service } from './s3.service';
 import * as crypto from 'crypto';

@@ -1,6 +1,6 @@
 
 
-import { Hoa } from "src/infrastructure/entities/hoa.entity";
+import { Hoa } from "src/adapters/entities/hoa.entity";
 import { RoleModel } from "./role.model";
 
 export interface UserModel {
