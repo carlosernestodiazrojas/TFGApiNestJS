@@ -9,9 +9,15 @@ import { IncidenceManagementUseCase } from "src/application/usecases/incidence/i
 import { CreateIncidenceDto } from "src/adapters/dtos/incidences/create-incidence.dto";
 import { UpdateIncidenceDto } from "src/adapters/dtos/incidences/update-incidence.dto";
 import { Incidence } from "src/adapters/entities/incidence.entity";
+import { IFileRelationRepositoryToken } from "src/application/repository-interfaces/ifile-relation.repository-interface";
+import { FileRelationRepository } from "src/adapters/repositories/file-relation.repository";
+import { FileService } from "src/application/services/upload/file.service";
+import { S3Service } from "src/application/services/upload/s3.service";
+import { FileEntity } from "src/adapters/entities/file.entity";
+import { FileRelation } from "src/adapters/entities/file_relations.entity";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Hoa, Incidence])],
+    imports: [TypeOrmModule.forFeature([Hoa, Incidence, FileEntity, FileRelation])],
     providers: [
         JwtService,
         IncidenceManagementUseCase,
@@ -21,6 +27,13 @@ import { Incidence } from "src/adapters/entities/incidence.entity";
             provide: IIncidenceRepositoryToken,
             useClass: IncidenceRepository,
         },
+
+        {
+            provide: IFileRelationRepositoryToken,
+            useClass: FileRelationRepository,
+        },
+        FileService,
+        S3Service
     ],
     controllers: [IncidenceController]
 })

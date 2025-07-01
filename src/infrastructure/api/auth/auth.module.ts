@@ -24,6 +24,7 @@ import { RolesGuard } from 'src/common/guards/roles.guard';
 import { Hoa } from 'src/adapters/entities/hoa.entity';
 import { HoaRepository } from 'src/adapters/repositories/hoa.repository';
 import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.repository-interface';
+import { RefreshTokenDto } from 'src/adapters/dtos/users/refreshToken.dto';
 
 @Module({
     imports: [
@@ -42,6 +43,7 @@ import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.
         HoaRepository,
         AuthService,
         LoginDto,
+        RefreshTokenDto,
         LoginUseCase,
         RegisterUserUseCase,
         { provide: IUserRepositoryToken, useClass: UserRepository },

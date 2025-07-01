@@ -10,4 +10,9 @@ export class LoginUseCase {
         const user = await this.authService.validateUser(dto.email, dto.password);
         return this.authService.login(user);
     }
+
+    async refreshToken(userId: string) {
+        return await this.authService.refreshToken(userId);
+    }
+
 }

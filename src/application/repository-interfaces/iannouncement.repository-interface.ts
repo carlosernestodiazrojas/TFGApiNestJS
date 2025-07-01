@@ -6,7 +6,7 @@ export const IAnnouncementRepositoryToken = 'IAnnouncementRepository';
 
 export interface IAnnouncementRepository {
     findById(id: string): Promise<IAnnouncementVM | null>;
-    findAll(hoa_id: string): Promise<IAnnouncementVM[]>;
+    findAll(hoa_id: string, limit: number, offset: number): Promise<IAnnouncementVM[]>;
     create(dto: ICreateAnnouncementDto): Promise<IAnnouncementVM>;
     update(id: string, dto: IUpdateAnnouncementDto): Promise<IAnnouncementVM>;
     delete(id: string): Promise<void>;

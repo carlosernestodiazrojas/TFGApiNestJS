@@ -35,12 +35,17 @@ export class AnnouncementRepository implements IAnnouncementRepository {
         return this.toViewModel(announcement);
     }
 
-    async findAll(hoa_id: string): Promise<AnnouncementVM[]> {
+    async findAll(hoa_id: string, limit: number, offset: number): Promise<AnnouncementVM[]> {
 
         const hoa = await this.repoHoa.findOne({ where: { id: hoa_id } });
         if (!hoa) throw new NotFoundException('Comunidad no encontrada');
 
-        const ents = await this.repo.find({ where: { hoa }, order: { created_at: 'asc' } });
+        const ents = await this.repo.find({
+            where: { hoa },
+            order: { created_at: 'asc' },
+            take: limit,
+            skip: offset
+        });
         return ents.map(e => this.toViewModel(e));
     }
 

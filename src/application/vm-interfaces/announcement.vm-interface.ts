@@ -7,4 +7,7 @@ export interface IAnnouncementVM {
     is_deleted: boolean;
     from: string;
     to: string;
+    images: string[];
+    imagesUrls: string[]
+    setImagesUrl: (imagesUrls: string[]) => void
 }
