@@ -6,4 +6,7 @@ export interface IIncidenceVM {
     is_solved: boolean;
     solved_at: string;
     is_deleted: boolean;
+    images: string[];
+    imagesUrls: string[];
+    setImagesUrl: (imagesUrls: string[]) => void;
 }

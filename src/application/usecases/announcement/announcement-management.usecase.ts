@@ -2,12 +2,15 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IAnnouncementRepository, IAnnouncementRepositoryToken } from 'src/application/repository-interfaces/iannouncement.repository-interface';
 import { ICreateAnnouncementDto } from 'src/application/dto-interfaces/announcement/create-announcement.dto-interface';
 import { IUpdateAnnouncementDto } from 'src/application/dto-interfaces/announcement/update-announcement.dto-interface';
+import { IFileRelationRepository, IFileRelationRepositoryToken } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
 
 @Injectable()
 export class AnnouncementManagementUseCase {
     constructor(
         @Inject(IAnnouncementRepositoryToken)
-        private repo: IAnnouncementRepository
+        private repo: IAnnouncementRepository,
+        @Inject(IFileRelationRepositoryToken)
+        private fileRelationRepo: IFileRelationRepository
     ) { }
 
 
@@ -20,11 +23,28 @@ export class AnnouncementManagementUseCase {
     }
 
     async findById(id: string) {
-        return await this.repo.findById(id);
+
+        const announcement = await this.repo.findById(id);
+        if (!announcement)
+            return null
+
+        const announcementImages = await this.fileRelationRepo.findByRelationId("announcement", announcement?.id as string)
+        announcement.images = announcementImages
+        return announcement
     }
 
-    async findAll(hoa_id: string) {
-        return await this.repo.findAll(hoa_id)
+
+
+    async findAll(hoa_id: string, limit: number, offset: number) {
+
+        const announcements = await this.repo.findAll(hoa_id, limit, offset)
+
+        for await (const announcement of announcements) {
+            const announcementImages = await this.fileRelationRepo.findByRelationId("announcement", announcement?.id as string)
+            announcement.images = announcementImages
+        }
+
+        return announcements
     }
 
     async delete(id: string) {

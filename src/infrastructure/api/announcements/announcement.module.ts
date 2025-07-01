@@ -10,9 +10,15 @@ import { UpdateAnnouncementDto } from "src/adapters/dtos/announcements/update-an
 import { AnnouncementManagementUseCase } from "src/application/usecases/announcement/announcement-management.usecase";
 import { IAnnouncementRepositoryToken } from "src/application/repository-interfaces/iannouncement.repository-interface";
 import { AnnouncementRepository } from "src/adapters/repositories/announcement.repository";
+import { FileService } from "src/application/services/upload/file.service";
+import { S3Service } from "src/application/services/upload/s3.service";
+import { FileEntity } from "src/adapters/entities/file.entity";
+import { FileRelation } from "src/adapters/entities/file_relations.entity";
+import { IFileRelationRepositoryToken } from "src/application/repository-interfaces/ifile-relation.repository-interface";
+import { FileRelationRepository } from "src/adapters/repositories/file-relation.repository";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Hoa, Announcement])],
+    imports: [TypeOrmModule.forFeature([Hoa, Announcement, FileEntity, FileRelation])],
     providers: [
         JwtService,
         RolesGuard,
@@ -23,6 +29,12 @@ import { AnnouncementRepository } from "src/adapters/repositories/announcement.r
             provide: IAnnouncementRepositoryToken,
             useClass: AnnouncementRepository,
         },
+        {
+            provide: IFileRelationRepositoryToken,
+            useClass: FileRelationRepository,
+        },
+        FileService,
+        S3Service
     ],
     controllers: [AnnouncementController]
 })

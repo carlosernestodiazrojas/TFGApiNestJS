@@ -4,6 +4,8 @@ import { LoginDto } from '../../../adapters/dtos/users/login.dto';
 import { LoginUseCase } from '../../../application/usecases/login/login.usecase';
 import { RegisterUserUseCase } from '../../../application/usecases/register-user.usecase';
 import { CreateUserDto } from '../../../adapters/dtos/users/create-user.dto';
+import { JwtAuthGuard } from "src/common/guards/jwt-auth.guard";
+import { RefreshTokenDto } from 'src/adapters/dtos/users/refreshToken.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -22,10 +24,17 @@ export class AuthController {
         return this.loginUseCase.execute(dto);
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(JwtAuthGuard)
     @Post('logout')
     logout(@Request() req) {
-        // Implementa blacklist si lo deseas
         return { message: 'Logout exitoso' };
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('refresh_token')
+    refresh_token(@Body() dto: RefreshTokenDto) {
+        console.log("Refrescando token", dto)
+        return this.loginUseCase.refreshToken(dto.userId);
+    }
+
 }

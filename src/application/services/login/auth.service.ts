@@ -33,4 +33,12 @@ export class AuthService {
             last_name: user.last_name
         };
     }
+
+
+    async refreshToken(userId: string) {
+        const user = await this.userRepo.findById(userId);
+        if (!user) throw new UnauthorizedException('Credenciales inválidas');
+        return this.login(user);
+    }
+
 }
