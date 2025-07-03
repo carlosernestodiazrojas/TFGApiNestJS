@@ -11,4 +11,7 @@ export class IUserVM {
     last_name: string;
     role: IRoleVM;
     hoa: IHoaVM | null;
+    images: string[];
+    imagesUrls: string[]
+    setImagesUrl: (imagesUrls: string[]) => void
 }

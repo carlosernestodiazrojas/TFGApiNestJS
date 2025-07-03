@@ -9,6 +9,8 @@ import { ChangePasswordUseCase } from '../../../application/usecases/change-pass
 import { UserRepository } from '../../../adapters/repositories/user.repository';
 import { RoleName } from 'src/common/enums/role-name.enum';
 import { ChangePasswordDto } from 'src/adapters/dtos/users/change-password.dto';
+import { GetUserUseCase } from 'src/application/usecases/get-user.usecase';
+import { FileService } from 'src/application/services/upload/file.service';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -18,6 +20,8 @@ export class UsersController {
         private registerUseCase: RegisterUserUseCase,
         private updateUseCase: UpdateUserUseCase,
         private changePwdUseCase: ChangePasswordUseCase,
+        private getUserUseCase: GetUserUseCase,
+        private fileService: FileService
     ) { }
 
     @Get()
@@ -28,8 +32,25 @@ export class UsersController {
 
     @Get(':id')
     @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN, RoleName.PRESIDENT, RoleName.OWNER)
-    findOne(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
-        return this.userRepo.findById(id);
+    async findOne(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+
+        const user = await this.getUserUseCase.execute(id)
+
+        if (!user)
+            return null
+
+        const { images } = user
+
+        const imagesUrls: string[] = []
+
+        for await (const imageId of images) {
+            const { url } = await this.fileService.getPresignedUrlById(imageId);
+            imagesUrls.push(url);
+        }
+
+        user.setImagesUrl(imagesUrls)
+        return user;
+
     }
 
     @Patch(':id')

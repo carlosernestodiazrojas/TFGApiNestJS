@@ -15,9 +15,16 @@ import { IHoaMeetingRepositoryToken } from 'src/application/repository-interface
 import { HoaRepository } from 'src/adapters/repositories/hoa.repository';
 import { Hoa } from 'src/adapters/entities/hoa.entity';
 import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.repository-interface';
+import { GetUserUseCase } from 'src/application/usecases/get-user.usecase';
+import { FileService } from 'src/application/services/upload/file.service';
+import { S3Service } from 'src/application/services/upload/s3.service';
+import { IFileRelationRepositoryToken } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
+import { FileRelationRepository } from 'src/adapters/repositories/file-relation.repository';
+import { FileRelation } from 'src/adapters/entities/file_relations.entity';
+import { FileEntity } from 'src/adapters/entities/file.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User, Role, Hoa])],
+    imports: [TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation])],
     controllers: [UsersController],
     providers: [
         UserRepository,
@@ -25,6 +32,7 @@ import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.
         HoaRepository,
         RegisterUserUseCase,
         UpdateUserUseCase,
+        GetUserUseCase,
         ChangePasswordUseCase,
         {
             provide: IRoleRepositoryToken,
@@ -38,7 +46,13 @@ import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.
             provide: IHoaRepositoryToken,
             useClass: HoaRepository,
         },
-        JwtService
+        JwtService,
+        {
+            provide: IFileRelationRepositoryToken,
+            useClass: FileRelationRepository,
+        },
+        FileService,
+        S3Service
     ],
 })
 export class UsersModule { }
