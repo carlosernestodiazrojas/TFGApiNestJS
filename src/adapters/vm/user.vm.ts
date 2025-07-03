@@ -13,6 +13,8 @@ export class UserVM implements IUserVM {
         this.hoa = hoa
         this.name = name;
         this.last_name = last_name
+        this.images = []
+        this.imagesUrls = []
     }
     id: string;
     email: string;
@@ -21,4 +23,10 @@ export class UserVM implements IUserVM {
     last_name: string;
     role: RoleVM;
     hoa: HoaVM | null;
+
+    images: string[]
+    imagesUrls: string[]
+    public setImagesUrl(imagesUrls: string[]) {
+        this.imagesUrls = imagesUrls
+    }
 }
