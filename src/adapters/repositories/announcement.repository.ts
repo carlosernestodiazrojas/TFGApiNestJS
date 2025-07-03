@@ -30,7 +30,8 @@ export class AnnouncementRepository implements IAnnouncementRepository {
     }
 
     async findById(id: string): Promise<AnnouncementVM | null> {
-        const announcement = await this.repo.findOne({ where: { id } });
+        const announcement = await this.repo.findOne({ where: { id }, relations: ['files'] });
+
         if (!announcement) throw new NotFoundException('Anuncio no encontrado');
         return this.toViewModel(announcement);
     }

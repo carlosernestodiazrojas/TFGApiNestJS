@@ -2,7 +2,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
 import { FileRelation } from '../entities/file_relations.entity';
 import { IFileRelationRepository } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
@@ -25,6 +25,32 @@ export class FileRelationRepository implements IFileRelationRepository {
         return results.map(r => r.file.id)
 
     }
+
+    async findByRelationsIds(entityName: string, ids: string[]): Promise<Map<string, FileRelation[]>> {
+
+        const results = await this.repo.find({
+            where: {
+                relation_entity_id: In(ids),
+                relation_entity_type: entityName,
+            },
+            relations: ['file']
+        });
+
+        if (!results)
+            return new Map<string, FileRelation[]>();
+
+        const filesMap = new Map<string, FileRelation[]>();
+        for (const fileRelation of results) {
+            const files = filesMap.get(fileRelation.relation_entity_id) || [];
+            files.push(fileRelation);
+            filesMap.set(fileRelation.relation_entity_id, files);
+        }
+
+        return filesMap
+
+    }
+
+
 
 
 

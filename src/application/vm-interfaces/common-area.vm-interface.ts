@@ -5,4 +5,7 @@ export interface ICommonAreaVM {
     is_bookable: boolean;
     daily_capacity: number;
     is_deleted: boolean;
+    images: string[];
+    imagesUrls: string[]
+    setImagesUrl: (imagesUrls: string[]) => void
 }

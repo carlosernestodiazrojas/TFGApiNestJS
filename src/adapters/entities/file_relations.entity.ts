@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { FileEntity } from './file.entity';
+import { Announcement } from './announcement.entity';
 
 @Entity('file_relations')
 export class FileRelation {
@@ -24,6 +25,10 @@ export class FileRelation {
     @ManyToOne(() => FileEntity, file => file.entities)
     @JoinColumn({ name: 'file_id' })
     file: FileEntity;
+
+    @ManyToOne(() => Announcement, announcement => announcement.files)
+    announcement: Announcement;
+
 
 
 }

@@ -11,9 +11,15 @@ import { CreateCommonAreaDto } from "src/adapters/dtos/common-areas/create-commo
 import { UpdateCommonAreaDto } from "src/adapters/dtos/common-areas/update-common-area.dto";
 import { ICommonAreaRepositoryToken } from "src/application/repository-interfaces/icommon-area.repository-interface";
 import { CommonAreaRepository } from "src/adapters/repositories/common-area.repository";
+import { IFileRelationRepositoryToken } from "src/application/repository-interfaces/ifile-relation.repository-interface";
+import { FileRelationRepository } from "src/adapters/repositories/file-relation.repository";
+import { FileService } from "src/application/services/upload/file.service";
+import { S3Service } from "src/application/services/upload/s3.service";
+import { FileEntity } from "src/adapters/entities/file.entity";
+import { FileRelation } from "src/adapters/entities/file_relations.entity";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Condominium, CommonArea])],
+    imports: [TypeOrmModule.forFeature([Condominium, CommonArea, FileEntity, FileRelation])],
     providers: [
         JwtService,
         RolesGuard,
@@ -24,6 +30,12 @@ import { CommonAreaRepository } from "src/adapters/repositories/common-area.repo
             provide: ICommonAreaRepositoryToken,
             useClass: CommonAreaRepository,
         },
+        {
+            provide: IFileRelationRepositoryToken,
+            useClass: FileRelationRepository,
+        },
+        FileService,
+        S3Service
     ],
     controllers: [CommonAreaController]
 })
