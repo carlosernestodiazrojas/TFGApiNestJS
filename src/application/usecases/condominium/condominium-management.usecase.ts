@@ -36,10 +36,22 @@ export class CondominiumManagementUseCase {
     async findAll(hoa_id: string) {
         const condominiums = await this.repo.findAll(hoa_id)
 
-        for await (const condominium of condominiums) {
-            const condominiumImages = await this.fileRelationRepo.findByRelationId("condominium", condominium?.id as string)
-            condominium.images = condominiumImages
-        }
+
+        const condominiumIds = condominiums.map(condominium => condominium.id);
+
+        const filesMap = await this.fileRelationRepo.findByRelationsIds('condominium', condominiumIds)
+
+        if (filesMap.size > 0)
+            for (const condominium of condominiums) {
+                let images = []
+                const fileImagesMap = filesMap.get(condominium.id)
+
+                if (fileImagesMap) {
+                    images = fileImagesMap.map(image => image.file.id)
+                }
+
+                condominium.images = images
+            }
 
         return condominiums
     }

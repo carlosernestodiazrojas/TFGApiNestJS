@@ -3,6 +3,7 @@ import { IAnnouncementRepository, IAnnouncementRepositoryToken } from 'src/appli
 import { ICreateAnnouncementDto } from 'src/application/dto-interfaces/announcement/create-announcement.dto-interface';
 import { IUpdateAnnouncementDto } from 'src/application/dto-interfaces/announcement/update-announcement.dto-interface';
 import { IFileRelationRepository, IFileRelationRepositoryToken } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
+import { In } from 'typeorm';
 
 @Injectable()
 export class AnnouncementManagementUseCase {
@@ -39,10 +40,22 @@ export class AnnouncementManagementUseCase {
 
         const announcements = await this.repo.findAll(hoa_id, limit, offset)
 
-        for await (const announcement of announcements) {
-            const announcementImages = await this.fileRelationRepo.findByRelationId("announcement", announcement?.id as string)
-            announcement.images = announcementImages
-        }
+        const announcementIds = announcements.map(announcement => announcement.id);
+
+        const filesMap = await this.fileRelationRepo.findByRelationsIds('announcement', announcementIds)
+
+
+        if (filesMap.size > 0)
+            for (const announcement of announcements) {
+                let images = []
+                const fileImagesMap = filesMap.get(announcement.id)
+
+                if (fileImagesMap) {
+                    images = fileImagesMap.map(image => image.file.id)
+                }
+
+                announcement.images = images
+            }
 
         return announcements
     }

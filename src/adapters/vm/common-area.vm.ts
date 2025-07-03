@@ -15,6 +15,8 @@ export class CommonAreaVM implements ICommonAreaVM {
         this.is_bookable = is_bookable
         this.daily_capacity = daily_capacity
         this.is_deleted = is_deleted
+        this.images = []
+        this.imagesUrls = []
     }
     id: string;
     name: string;
@@ -22,4 +24,12 @@ export class CommonAreaVM implements ICommonAreaVM {
     is_bookable: boolean;
     daily_capacity: number;
     is_deleted: boolean;
+
+    images: string[]
+    imagesUrls: string[]
+
+    public setImagesUrl(imagesUrls: string[]) {
+        this.imagesUrls = imagesUrls
+    }
+
 }

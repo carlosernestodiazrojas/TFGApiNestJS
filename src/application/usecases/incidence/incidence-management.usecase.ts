@@ -31,8 +31,6 @@ export class IncidenceManagementUseCase {
         const incidenceImages = await this.fileRelationRepo.findByRelationId("incidence", incidence?.id as string)
         incidence.images = incidenceImages
 
-        console.log(incidence)
-
         return incidence
 
     }
@@ -45,6 +43,22 @@ export class IncidenceManagementUseCase {
             const incidenceImages = await this.fileRelationRepo.findByRelationId("incidence", incidence?.id as string)
             incidence.images = incidenceImages
         }
+
+        const incidenceIds = incidences.map(incidence => incidence.id);
+
+        const filesMap = await this.fileRelationRepo.findByRelationsIds('incidence', incidenceIds)
+
+        if (filesMap.size > 0)
+            for (const incidence of incidences) {
+                let images = []
+                const fileImagesMap = filesMap.get(incidence.id)
+
+                if (fileImagesMap) {
+                    images = fileImagesMap.map(image => image.file.id)
+                }
+
+                incidence.images = images
+            }
 
         return incidences
     }

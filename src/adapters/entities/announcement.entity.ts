@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Hoa } from './hoa.entity';
 import { AnnouncementModel } from 'src/domain/model-interfaces/announcement.model';
+import { FileRelation } from './file_relations.entity';
 
 @Entity('announcements')
 export class Announcement implements AnnouncementModel {
@@ -40,6 +41,9 @@ export class Announcement implements AnnouncementModel {
     @ManyToOne(() => Hoa, hoa => hoa.announcements)
     @JoinColumn({ name: 'hoa_id' })
     hoa: Hoa;
+
+    @OneToMany(() => FileRelation, relation => relation.announcement) // <-- CORRECCIÓN AQUÍ
+    files: FileRelation[];
 
 
 }
