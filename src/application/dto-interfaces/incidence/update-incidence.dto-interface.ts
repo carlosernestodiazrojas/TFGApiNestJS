@@ -3,4 +3,5 @@ export interface IUpdateIncidenceDto {
     description: string;
     is_votable: boolean;
     is_solved: boolean;
+    file_id: string
 }

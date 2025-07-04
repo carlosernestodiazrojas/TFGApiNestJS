@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { IUpdateCondominiumDto } from 'src/application/dto-interfaces/condominium/update-condominium.dto-interface';
 
 export class UpdateCondominiumDto implements IUpdateCondominiumDto {
@@ -19,4 +19,9 @@ export class UpdateCondominiumDto implements IUpdateCondominiumDto {
     @MinLength(1)
     @MaxLength(255)
     description: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
+
 }

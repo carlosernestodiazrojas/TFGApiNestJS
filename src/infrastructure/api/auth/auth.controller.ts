@@ -33,7 +33,6 @@ export class AuthController {
     @UseGuards(JwtAuthGuard)
     @Post('refresh_token')
     refresh_token(@Body() dto: RefreshTokenDto) {
-        console.log("Refrescando token", dto)
         return this.loginUseCase.refreshToken(dto.userId);
     }
 

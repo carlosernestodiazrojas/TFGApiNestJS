@@ -11,6 +11,7 @@ import { RoleName } from 'src/common/enums/role-name.enum';
 import { ChangePasswordDto } from 'src/adapters/dtos/users/change-password.dto';
 import { GetUserUseCase } from 'src/application/usecases/get-user.usecase';
 import { FileService } from 'src/application/services/upload/file.service';
+import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.usecase';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -21,16 +22,34 @@ export class UsersController {
         private updateUseCase: UpdateUserUseCase,
         private changePwdUseCase: ChangePasswordUseCase,
         private getUserUseCase: GetUserUseCase,
+        private getAllUsersUseCase: GetAllUsersUseCase,
         private fileService: FileService
     ) { }
 
-    @Get()
+    @Get('/allByHoa/:hoa_id')
     @Roles(RoleName.GLOBAL_ADMIN)
-    findAll() {
-        return this.userRepo.findAll();
+    async findAll(@Param('hoa_id', new ParseUUIDPipe({ version: '4' })) hoa_id: string) {
+
+        const users = await this.getAllUsersUseCase.execute(hoa_id);
+
+        for await (const user of users) {
+            const { images } = user
+
+            const imagesUrls: string[] = []
+
+            for await (const imageId of images) {
+                const { url } = await this.fileService.getPresignedUrlById(imageId);
+                imagesUrls.push(url);
+            }
+
+            user.setImagesUrl(imagesUrls)
+        }
+
+        return users
+
     }
 
-    @Get(':id')
+    @Get('/getUser/:id')
     @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN, RoleName.PRESIDENT, RoleName.OWNER)
     async findOne(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
 

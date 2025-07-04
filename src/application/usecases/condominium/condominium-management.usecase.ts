@@ -15,11 +15,23 @@ export class CondominiumManagementUseCase {
 
 
     async create(dto: ICreateCondominiumDto) {
-        return await this.repo.create(dto);
+
+        const condominium = await this.repo.create(dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('condominium', condominium.id, dto.file_id);
+
+        return this.repo.findById(condominium.id)
+
     }
 
     async update(id: string, dto: IUpdateCondominiumDto) {
-        return await this.repo.update(id, dto);
+        const condominium = await this.repo.update(id, dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('condominium', condominium.id, dto.file_id);
+
+        return this.repo.findById(condominium.id)
     }
 
     async findById(id: string) {

@@ -1,5 +1,5 @@
 
-import { IsBoolean, IsNotEmpty, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 
 import { ICreateIncidenceDto } from 'src/application/dto-interfaces/incidence/create-incidence.dto-interface';
 
@@ -23,4 +23,9 @@ export class CreateIncidenceDto implements ICreateIncidenceDto {
     @IsNotEmpty()
     @IsUUID('4')
     hoa_id: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
+
 }

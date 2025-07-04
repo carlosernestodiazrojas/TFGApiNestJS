@@ -25,10 +25,16 @@ import { Hoa } from 'src/adapters/entities/hoa.entity';
 import { HoaRepository } from 'src/adapters/repositories/hoa.repository';
 import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.repository-interface';
 import { RefreshTokenDto } from 'src/adapters/dtos/users/refreshToken.dto';
+import { IFileRelationRepositoryToken } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
+import { FileRelationRepository } from 'src/adapters/repositories/file-relation.repository';
+import { FileService } from 'src/application/services/upload/file.service';
+import { S3Service } from 'src/application/services/upload/s3.service';
+import { FileRelation } from 'src/adapters/entities/file_relations.entity';
+import { FileEntity } from 'src/adapters/entities/file.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([User, Role, Hoa]),
+        TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation]),
         PassportModule.register({ defaultStrategy: 'jwt' }),
 
         JwtModule.register({
@@ -51,7 +57,13 @@ import { RefreshTokenDto } from 'src/adapters/dtos/users/refreshToken.dto';
         { provide: IHoaRepositoryToken, useClass: HoaRepository },
 
         JwtStrategy,
-        RolesGuard
+        RolesGuard,
+        {
+            provide: IFileRelationRepositoryToken,
+            useClass: FileRelationRepository,
+        },
+        FileService,
+        S3Service
     ],
     controllers: [AuthController],
     exports: [

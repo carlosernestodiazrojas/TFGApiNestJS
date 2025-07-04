@@ -6,4 +6,5 @@ export interface ICreateSpecialAssessmentDto {
     total_amount: number;
     individual_amount: number;
     hoa_id: string;
+    file_id: string;
 }

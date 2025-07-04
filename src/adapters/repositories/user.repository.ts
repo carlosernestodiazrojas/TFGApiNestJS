@@ -46,9 +46,16 @@ export class UserRepository implements IUserRepository {
         return ent ? this.toViewModel(ent) : null;
     }
 
-    async findAll(): Promise<UserVM[]> {
+    async findAll(hoa_id: string): Promise<UserVM[]> {
+
+        const hoaEnt = await this.hoaRepo.findById(hoa_id);
+        if (!hoaEnt) throw new NotFoundException('Comunidad no encontrada');
+
         const ents = await this.repo.find({ relations: ['role', 'hoa'] });
-        return ents.map(e => this.toViewModel(e));
+
+        const usersHoa = ents.filter(e => e.hoa.id === hoa_id)
+
+        return usersHoa.map(e => this.toViewModel(e));
     }
 
     async create(dto: CreateUserDto): Promise<UserVM> {
@@ -88,8 +95,19 @@ export class UserRepository implements IUserRepository {
                 .set(roleEnt.id);
         }
 
-        if (dto.email || dto.password || dto.name || dto.last_name)
-            await this.repo.update(id, dto as any);
+        if (dto.email || dto.name || dto.last_name) {
+
+            if (dto.email)
+                user.email = dto.email
+
+            if (dto.name)
+                user.name = dto.name
+
+            if (dto.last_name)
+                user.last_name = dto.last_name
+
+            await this.repo.save(user)
+        }
 
         const updated = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
         return this.toViewModel(updated as User);

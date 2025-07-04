@@ -1,5 +1,5 @@
 
-import { IsBoolean, IsDecimal, IsNotEmpty, IsNumber, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsDecimal, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { ICreateSpecialAssessmentDto } from 'src/application/dto-interfaces/special-assessments/create-assessment.dto-interface';
 
 export class CreateSpecialAssessmentDto implements ICreateSpecialAssessmentDto {
@@ -31,4 +31,9 @@ export class CreateSpecialAssessmentDto implements ICreateSpecialAssessmentDto {
     @IsNotEmpty()
     @IsUUID('4')
     hoa_id: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
+
 }

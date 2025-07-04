@@ -5,4 +5,5 @@ export interface ICreateUserDto {
     password: string;
     hoa_id: string;
     role: RoleName;
+    file_id?: string
 }

@@ -6,6 +6,7 @@ import { SpecialAssessment } from './special-assessment.entity';
 import { HoaMeeting } from './hoa_meeting.entity';
 import { HoaModel } from 'src/domain/model-interfaces/hoa.model';
 import { User } from './user.entity';
+import { FileRelation } from './file_relations.entity';
 
 @Entity('hoas')
 export class Hoa implements HoaModel {
@@ -35,5 +36,6 @@ export class Hoa implements HoaModel {
 
     @OneToMany(() => User, user => user.hoa)
     users: User[];
+
 
 }

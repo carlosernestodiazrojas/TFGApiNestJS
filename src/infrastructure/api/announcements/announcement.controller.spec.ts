@@ -71,8 +71,10 @@ describe('AnnouncementController', () => {
     describe('findAll', () => {
         it('Debe llamar a useCase.findAll con el id de la comunidad recibido', async () => {
             const hoaId = 'f82a1b94-8857-4b68-b391-4e7a3d2e9c1c';
-            await controller.findAll(hoaId);
-            expect(useCaseMock.findAll).toHaveBeenCalledWith(hoaId);
+            const limit = 10;
+            const offset = 0;
+            await controller.findAll(hoaId, limit, offset);
+            expect(useCaseMock.findAll).toHaveBeenCalledWith(hoaId, limit, offset);
         });
     });
 
@@ -92,6 +94,7 @@ describe('AnnouncementController', () => {
                 description: 'Descripción del nuevo anuncio editado',
                 from: '2025-06-23T12:00:00Z',
                 to: '2025-06-25T12:00:00Z',
+                file_id: ''
             };
             await controller.update(announcementId, dto);
             expect(useCaseMock.update).toHaveBeenCalledWith(announcementId, dto);

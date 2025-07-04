@@ -1,4 +1,4 @@
-import { IsBoolean, IsDecimal, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsDecimal, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { IUpdateSpecialAssessmentDto } from 'src/application/dto-interfaces/special-assessments/update-assessment.dto-interface';
 
 export class UpdateSpecialAssessmentDto implements IUpdateSpecialAssessmentDto {
@@ -30,5 +30,10 @@ export class UpdateSpecialAssessmentDto implements IUpdateSpecialAssessmentDto {
     @MinLength(1)
     @MaxLength(255)
     description: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
+
 
 }

@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { ICreateCommonAreaDto } from 'src/application/dto-interfaces/common-area/create-common-area.dto-interface';
 
 export class CreateCommonAreaDto implements ICreateCommonAreaDto {
@@ -26,5 +26,10 @@ export class CreateCommonAreaDto implements ICreateCommonAreaDto {
     @IsNotEmpty()
     @IsUUID()
     condominium_id: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
+
 
 }

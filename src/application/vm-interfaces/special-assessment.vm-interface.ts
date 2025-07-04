@@ -8,4 +8,7 @@ export interface ISpecialAssessmentVM {
     individual_amount: number;
     is_approved: boolean;
     is_deleted: boolean;
+    images: string[];
+    imagesUrls: string[]
+    setImagesUrl: (imagesUrls: string[]) => void
 }
