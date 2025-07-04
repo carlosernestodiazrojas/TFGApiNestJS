@@ -19,6 +19,8 @@ export class SpecialAssessmentVM implements ISpecialAssessmentVM {
         this.individual_amount = individual_amount
         this.is_approved = is_approved
         this.is_deleted = is_deleted
+        this.images = []
+        this.imagesUrls = []
     }
     id: string;
     title: string;
@@ -28,4 +30,11 @@ export class SpecialAssessmentVM implements ISpecialAssessmentVM {
     individual_amount: number;
     is_approved: boolean;
     is_deleted: boolean;
+
+    images: string[]
+    imagesUrls: string[]
+
+    public setImagesUrl(imagesUrls: string[]) {
+        this.imagesUrls = imagesUrls
+    }
 }

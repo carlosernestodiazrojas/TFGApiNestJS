@@ -3,4 +3,5 @@ export interface IUpdateCommonAreaDto {
     description: string;
     is_bookable: boolean;
     daily_capacity: number;
+    file_id: string;
 }

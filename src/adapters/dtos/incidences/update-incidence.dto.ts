@@ -1,4 +1,4 @@
-import { IsBoolean, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { IUpdateIncidenceDto } from 'src/application/dto-interfaces/incidence/update-incidence.dto-interface';
 
 export class UpdateIncidenceDto implements IUpdateIncidenceDto {
@@ -22,5 +22,9 @@ export class UpdateIncidenceDto implements IUpdateIncidenceDto {
     @MinLength(1)
     @MaxLength(255)
     description: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
 
 }

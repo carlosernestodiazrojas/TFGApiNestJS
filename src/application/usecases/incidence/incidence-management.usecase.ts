@@ -15,11 +15,23 @@ export class IncidenceManagementUseCase {
 
 
     async create(dto: ICreateIncidenceDto) {
-        return await this.repo.create(dto);
+
+        const incidence = await this.repo.create(dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('incidence', incidence.id, dto.file_id);
+
+        return this.repo.findById(incidence.id)
     }
 
     async update(id: string, dto: IUpdateIncidenceDto) {
-        return await this.repo.update(id, dto);
+
+        const incidence = await this.repo.update(id, dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('incidence', incidence.id, dto.file_id);
+
+        return this.repo.findById(incidence.id)
     }
 
     async findById(id: string) {

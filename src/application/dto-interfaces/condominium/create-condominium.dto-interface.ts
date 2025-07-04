@@ -4,4 +4,5 @@ export interface ICreateCondominiumDto {
     description: string;
     address: string;
     hoa_id: string;
+    file_id?: string
 }

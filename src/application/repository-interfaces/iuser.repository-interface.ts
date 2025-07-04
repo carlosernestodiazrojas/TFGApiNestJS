@@ -7,7 +7,7 @@ export const IUserRepositoryToken = 'IUserRepository';
 export interface IUserRepository {
     findByEmail(email: string): Promise<IUserVM | null>;
     findById(id: string): Promise<IUserVM | null>;
-    findAll(): Promise<IUserVM[]>;
+    findAll(hoa_id: string): Promise<IUserVM[]>;
     create(dto: ICreateUserDto): Promise<IUserVM>;
     update(id: string, dto: IUpdateUserDto): Promise<IUserVM>;
 }

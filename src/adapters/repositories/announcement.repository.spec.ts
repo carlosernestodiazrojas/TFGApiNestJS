@@ -26,6 +26,7 @@ const mockAnnouncement: Announcement = {
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     deleted_at: new Date().toISOString(),
+    files: []
 };
 
 const mockAnnouncementVM: AnnouncementVM = new AnnouncementVM(
@@ -81,6 +82,7 @@ describe('AnnouncementRepository', () => {
                 hoa_id: HOA_ID,
                 from: '2025-06-23T12:00:00Z',
                 to: '2025-06-25T12:00:00Z',
+                file_id: ''
             };
 
             const createdEntity = { ...createDto, id: ANNOUNCEMENT_ID, is_deleted: false, hoa: mockHoa };

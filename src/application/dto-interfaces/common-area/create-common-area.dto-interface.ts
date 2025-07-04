@@ -5,4 +5,5 @@ export interface ICreateCommonAreaDto {
     is_bookable: boolean;
     daily_capacity: number;
     condominium_id: string;
+    file_id: string;
 }

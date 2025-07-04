@@ -15,11 +15,22 @@ export class CommonAreaManagementUseCase {
 
 
     async create(dto: ICreateCommonAreaDto) {
-        return await this.repo.create(dto);
+        const commonArea = await this.repo.create(dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('commonarea', commonArea.id, dto.file_id);
+
+        return this.repo.findById(commonArea.id)
     }
 
     async update(id: string, dto: IUpdateCommonAreaDto) {
-        return await this.repo.update(id, dto);
+
+        const commonArea = await this.repo.update(id, dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('commonarea', commonArea.id, dto.file_id);
+
+        return this.repo.findById(commonArea.id)
     }
 
     async findById(id: string) {

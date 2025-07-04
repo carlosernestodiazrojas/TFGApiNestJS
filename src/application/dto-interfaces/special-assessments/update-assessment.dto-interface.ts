@@ -5,4 +5,5 @@ export interface IUpdateSpecialAssessmentDto {
     total_amount: number;
     individual_amount: number;
     is_approved: boolean;
+    file_id: string;
 }

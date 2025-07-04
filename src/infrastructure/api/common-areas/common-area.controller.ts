@@ -23,8 +23,6 @@ export class CommonAreaController {
 
         const commonAreas = await this.useCase.findAll(condominium_id);
 
-        console.log("Common areas", commonAreas)
-
         for await (const commonArea of commonAreas) {
             const { images } = commonArea
 

@@ -4,4 +4,5 @@ export interface ICreateIncidenceDto {
     description: string;
     is_votable: boolean;
     hoa_id: string
+    file_id: string
 }

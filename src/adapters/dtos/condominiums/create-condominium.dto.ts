@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { ICreateCondominiumDto } from 'src/application/dto-interfaces/condominium/create-condominium.dto-interface';
 
 export class CreateCondominiumDto implements ICreateCondominiumDto {
@@ -24,5 +24,9 @@ export class CreateCondominiumDto implements ICreateCondominiumDto {
     @IsNotEmpty()
     @IsUUID()
     hoa_id: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
 
 }

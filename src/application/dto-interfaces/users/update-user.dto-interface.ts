@@ -7,4 +7,5 @@ export interface IUpdateUserDto {
     name?: string
     last_name?: string
     hoa_id?: string
+    file_id?: string
 }

@@ -89,10 +89,12 @@ describe('AnnouncementManagementUseCase', () => {
     describe('findAll', () => {
         it('Debe llamar a `repository.findAll` con el `hoa_id` correcto y devolver el resultado.', async () => {
             const hoaId = 'f82a1b94-8857-4b68-b391-4e7a3d2e9c1c';
+            const limit = 10;
+            const offset = 0;
             const expectedResult: IAnnouncementVM[] = [{ id: '1', title: 'First' } as IAnnouncementVM];
             mockAnnouncementRepo.findAll.mockResolvedValue(expectedResult);
-            const result = await useCase.findAll(hoaId);
-            expect(repositoryMock.findAll).toHaveBeenCalledWith(hoaId);
+            const result = await useCase.findAll(hoaId, limit, offset);
+            expect(repositoryMock.findAll).toHaveBeenCalledWith(hoaId, limit, offset);
             expect(result).toEqual(expectedResult);
         });
     });

@@ -11,7 +11,6 @@ import { ChangePasswordUseCase } from '../../../application/usecases/change-pass
 import { IRoleRepositoryToken } from 'src/application/repository-interfaces/irole.repository-interface';
 import { IUserRepositoryToken } from 'src/application/repository-interfaces/iuser.repository-interface';
 import { JwtService } from '@nestjs/jwt';
-import { IHoaMeetingRepositoryToken } from 'src/application/repository-interfaces/ihoa-meeting.repository-interface';
 import { HoaRepository } from 'src/adapters/repositories/hoa.repository';
 import { Hoa } from 'src/adapters/entities/hoa.entity';
 import { IHoaRepositoryToken } from 'src/application/repository-interfaces/ihoa.repository-interface';
@@ -22,6 +21,7 @@ import { IFileRelationRepositoryToken } from 'src/application/repository-interfa
 import { FileRelationRepository } from 'src/adapters/repositories/file-relation.repository';
 import { FileRelation } from 'src/adapters/entities/file_relations.entity';
 import { FileEntity } from 'src/adapters/entities/file.entity';
+import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.usecase';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation])],
@@ -33,6 +33,7 @@ import { FileEntity } from 'src/adapters/entities/file.entity';
         RegisterUserUseCase,
         UpdateUserUseCase,
         GetUserUseCase,
+        GetAllUsersUseCase,
         ChangePasswordUseCase,
         {
             provide: IRoleRepositoryToken,

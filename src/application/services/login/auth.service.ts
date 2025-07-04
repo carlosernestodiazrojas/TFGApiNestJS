@@ -17,7 +17,7 @@ export class AuthService {
         if (!user) throw new UnauthorizedException('Credenciales inválidas');
         const match = await bcrypt.compare(pass, user.password);
         if (!match) throw new UnauthorizedException('Credenciales inválidas');
-        console.log("user", user)
+
         return user;
     }
 
