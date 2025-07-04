@@ -16,11 +16,21 @@ export class AnnouncementManagementUseCase {
 
 
     async create(dto: ICreateAnnouncementDto) {
-        return await this.repo.create(dto);
+        const announcement = await this.repo.create(dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('announcement', announcement.id, dto.file_id);
+
+        return this.repo.findById(announcement.id)
     }
 
     async update(id: string, dto: IUpdateAnnouncementDto) {
-        return await this.repo.update(id, dto);
+        const announcement = await this.repo.update(id, dto);
+
+        if (dto.file_id && dto.file_id.length > 0)
+            await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('announcement', announcement.id, dto.file_id);
+
+        return this.repo.findById(announcement.id)
     }
 
     async findById(id: string) {
