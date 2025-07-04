@@ -1,5 +1,5 @@
 
-import { IsNotEmpty, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { ICreateAnnouncementDto } from 'src/application/dto-interfaces/announcement/create-announcement.dto-interface';
 
 export class CreateAnnouncementDto implements ICreateAnnouncementDto {
@@ -31,5 +31,9 @@ export class CreateAnnouncementDto implements ICreateAnnouncementDto {
     @MinLength(1)
     @MaxLength(255)
     to: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
 
 }

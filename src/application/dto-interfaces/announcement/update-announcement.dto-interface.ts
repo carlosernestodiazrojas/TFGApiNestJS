@@ -3,4 +3,5 @@ export interface IUpdateAnnouncementDto {
     description: string;
     from: string
     to: string
+    file_id: string
 }

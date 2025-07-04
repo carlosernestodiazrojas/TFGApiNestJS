@@ -1,4 +1,4 @@
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { IUpdateAnnouncementDto } from 'src/application/dto-interfaces/announcement/update-announcement.dto-interface';
 
 export class UpdateAnnouncementDto implements IUpdateAnnouncementDto {
@@ -25,5 +25,9 @@ export class UpdateAnnouncementDto implements IUpdateAnnouncementDto {
     @MinLength(1)
     @MaxLength(255)
     to: string;
+
+    @IsOptional()
+    @IsUUID('4')
+    file_id: string;
 
 }

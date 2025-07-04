@@ -5,4 +5,5 @@ export interface ICreateAnnouncementDto {
     hoa_id: string;
     from: string;
     to: string
+    file_id: string
 }
