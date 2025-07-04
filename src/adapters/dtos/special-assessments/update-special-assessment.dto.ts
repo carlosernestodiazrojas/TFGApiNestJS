@@ -1,4 +1,4 @@
-import { IsBoolean, IsDecimal, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsDecimal, IsNumber, IsOptional, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { IUpdateSpecialAssessmentDto } from 'src/application/dto-interfaces/special-assessments/update-assessment.dto-interface';
 
 export class UpdateSpecialAssessmentDto implements IUpdateSpecialAssessmentDto {
@@ -12,11 +12,11 @@ export class UpdateSpecialAssessmentDto implements IUpdateSpecialAssessmentDto {
     is_votable: boolean;
 
     @IsOptional()
-    @IsDecimal({ decimal_digits: '2' })
+    @IsNumber({ maxDecimalPlaces: 2 })
     total_amount: number;
 
     @IsOptional()
-    @IsDecimal({ decimal_digits: '2' })
+    @IsNumber({ maxDecimalPlaces: 2 })
     individual_amount: number;
 
     @IsOptional()

@@ -43,7 +43,7 @@ export class AnnouncementRepository implements IAnnouncementRepository {
 
         const ents = await this.repo.find({
             where: { hoa },
-            order: { created_at: 'asc' },
+            order: { created_at: 'desc' },
             take: limit,
             skip: offset
         });

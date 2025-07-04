@@ -42,7 +42,7 @@ export class CommonAreaRepository implements ICommonAreaRepository {
         const ents = await this.repo.find({
             where: { condominium: { id: condominium.id } },
             relations: ['condominium'],
-            order: { created_at: 'ASC' }
+            order: { created_at: 'desc' },
         });
 
         return ents.map(e => this.toViewModel(e));

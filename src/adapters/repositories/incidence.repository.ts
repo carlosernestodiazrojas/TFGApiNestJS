@@ -41,7 +41,7 @@ export class IncidenceRepository implements IIncidenceRepository {
         const hoa = await this.repoHoa.findOne({ where: { id: hoa_id } });
         if (!hoa) throw new NotFoundException('Comunidad no encontrada');
 
-        const ents = await this.repo.find({ where: { hoa } });
+        const ents = await this.repo.find({ where: { hoa }, order: { created_at: 'desc' } });
         return ents.map(e => this.toViewModel(e));
     }
 
