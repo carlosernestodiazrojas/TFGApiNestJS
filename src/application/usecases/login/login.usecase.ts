@@ -7,8 +7,7 @@ export class LoginUseCase {
     constructor(private authService: AuthService) { }
 
     async execute(dto: ILoginDto) {
-        const user = await this.authService.validateUser(dto.email, dto.password);
-        return this.authService.login(user);
+        return this.authService.login(dto.email, dto.password);
     }
 
     async refreshToken(userId: string) {

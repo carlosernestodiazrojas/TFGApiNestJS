@@ -8,7 +8,9 @@ export class PropertyVM implements IPropertyVM {
         property_type: string,
         has_storage_room: boolean,
         has_parking_space: boolean,
-        current_on_payments: boolean
+        current_on_payments: boolean,
+        created: string,
+        updated: string,
     ) {
         this.id = id
         this.property_identifier = property_identifier
@@ -17,6 +19,8 @@ export class PropertyVM implements IPropertyVM {
         this.has_storage_room = has_storage_room;
         this.has_parking_space = has_parking_space;
         this.current_on_payments = current_on_payments;
+        this.created = created;
+        this.updated = updated;
     }
     id: string;
     property_identifier: string;
@@ -25,4 +29,6 @@ export class PropertyVM implements IPropertyVM {
     has_storage_room: boolean;
     has_parking_space: boolean;
     current_on_payments: boolean;
+    created: string;
+    updated: string;
 }

@@ -22,14 +22,22 @@ import { FileRelationRepository } from 'src/adapters/repositories/file-relation.
 import { FileRelation } from 'src/adapters/entities/file_relations.entity';
 import { FileEntity } from 'src/adapters/entities/file.entity';
 import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.usecase';
+import { CondominiumPropertyRepository } from 'src/adapters/repositories/condominium-property.repository';
+import { ICondominiumRepositoryToken } from 'src/application/repository-interfaces/icondominium.repository-interface';
+import { Property } from 'src/adapters/entities/property.entity';
+import { CondominiumRepository } from 'src/adapters/repositories/condominium.repository';
+import { Condominium } from 'src/adapters/entities/condominium.entity';
+import { IPropertyRepositoryToken } from 'src/application/repository-interfaces/iproperty.repository-interface';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation])],
+    imports: [TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation, Condominium, Property])],
     controllers: [UsersController],
     providers: [
         UserRepository,
         RoleRepository,
         HoaRepository,
+        CondominiumPropertyRepository,
+        CondominiumRepository,
         RegisterUserUseCase,
         UpdateUserUseCase,
         GetUserUseCase,
@@ -46,6 +54,14 @@ import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.useca
         {
             provide: IHoaRepositoryToken,
             useClass: HoaRepository,
+        },
+        {
+            provide: IPropertyRepositoryToken,
+            useClass: CondominiumPropertyRepository,
+        },
+        {
+            provide: ICondominiumRepositoryToken,
+            useClass: CondominiumRepository,
         },
         JwtService,
         {

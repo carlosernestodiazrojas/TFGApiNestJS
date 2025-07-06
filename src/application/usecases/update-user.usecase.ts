@@ -16,9 +16,9 @@ export class UpdateUserUseCase {
     async execute(id: string, dto: IUpdateUserDto) {
         if (dto.password) dto.password = await bcrypt.hash(dto.password, 10);
         const user = await this.userRepo.update(id, dto);
-        //return this.userRepo.findById(id);
 
-        //const user = await this.userRepo.update(id, dto);
+        if (!user)
+            return null
 
         if (dto.file_id && dto.file_id.length > 0)
             await this.fileRelationRepo.findByRelationIdAndCreateOrReplace('user', user.id, dto.file_id);

@@ -8,7 +8,9 @@ export class IncidenceVM implements IIncidenceVM {
         is_votable: boolean,
         is_solved: boolean,
         solved_at: string,
-        is_deleted: boolean
+        is_deleted: boolean,
+        created: string,
+        updated: string,
     ) {
         this.id = id
         this.name = name
@@ -17,6 +19,8 @@ export class IncidenceVM implements IIncidenceVM {
         this.is_solved = is_solved
         this.solved_at = solved_at
         this.is_deleted = is_deleted
+        this.created = created
+        this.updated = updated
         this.images = []
         this.imagesUrls = []
     }
@@ -28,8 +32,10 @@ export class IncidenceVM implements IIncidenceVM {
     is_solved: boolean;
     solved_at: string;
     is_deleted: boolean;
-    images: string[]
-    imagesUrls: string[]
+    created: string;
+    updated: string;
+    images: string[];
+    imagesUrls: string[];
     public setImagesUrl(imagesUrls: string[]) {
         this.imagesUrls = imagesUrls
     }

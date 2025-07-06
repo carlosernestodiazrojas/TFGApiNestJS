@@ -6,13 +6,17 @@ export class CondominiumVM implements ICondominiumVM {
         name: string,
         description: string,
         address: string,
-        is_deleted: boolean
+        is_deleted: boolean,
+        created: string,
+        updated: string
     ) {
         this.id = id
         this.name = name
         this.description = description
         this.address = address
         this.is_deleted = is_deleted
+        this.created = created
+        this.updated = updated
         this.images = []
         this.imagesUrls = []
     }
@@ -21,6 +25,9 @@ export class CondominiumVM implements ICondominiumVM {
     description: string;
     address: string;
     is_deleted: boolean;
+
+    created: string;
+    updated: string;
 
     images: string[]
     imagesUrls: string[]

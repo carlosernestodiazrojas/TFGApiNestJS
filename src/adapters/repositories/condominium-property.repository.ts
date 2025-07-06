@@ -25,7 +25,9 @@ export class CondominiumPropertyRepository implements IPropertyRepository {
             property.property_type,
             property.has_storage_room,
             property.has_parking_space,
-            property.current_on_payments
+            property.current_on_payments,
+            property.created_at,
+            property.updated_at
         );
     }
 

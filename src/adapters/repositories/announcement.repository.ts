@@ -25,7 +25,9 @@ export class AnnouncementRepository implements IAnnouncementRepository {
             announcement.description,
             announcement.is_deleted,
             announcement.from,
-            announcement.to
+            announcement.to,
+            announcement.created_at,
+            announcement.updated_at
         );
     }
 

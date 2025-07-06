@@ -9,7 +9,9 @@ export class SpecialAssessmentVM implements ISpecialAssessmentVM {
         total_amount: number,
         individual_amount: number,
         is_approved: boolean,
-        is_deleted: boolean
+        is_deleted: boolean,
+        created: string,
+        updated: string,
     ) {
         this.id = id
         this.title = title
@@ -19,6 +21,8 @@ export class SpecialAssessmentVM implements ISpecialAssessmentVM {
         this.individual_amount = individual_amount
         this.is_approved = is_approved
         this.is_deleted = is_deleted
+        this.created = created
+        this.updated = updated
         this.images = []
         this.imagesUrls = []
     }
@@ -30,7 +34,8 @@ export class SpecialAssessmentVM implements ISpecialAssessmentVM {
     individual_amount: number;
     is_approved: boolean;
     is_deleted: boolean;
-
+    created: string;
+    updated: string;
     images: string[]
     imagesUrls: string[]
 

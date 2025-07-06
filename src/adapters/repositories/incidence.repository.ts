@@ -26,7 +26,9 @@ export class IncidenceRepository implements IIncidenceRepository {
             incidence.is_votable,
             incidence.is_solved,
             incidence.solved_at,
-            incidence.is_deleted
+            incidence.is_deleted,
+            incidence.created_at,
+            incidence.updated_at
         );
     }
 

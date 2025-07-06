@@ -25,6 +25,8 @@ export class CommonAreaRepository implements ICommonAreaRepository {
             common_area.is_bookable,
             common_area.daily_capacity,
             common_area.is_deleted,
+            common_area.created_at,
+            common_area.updated_at
         );
     }
 

@@ -25,4 +25,8 @@ export class UpdateUserDto implements IUpdateUserDto {
     @IsUUID('4')
     file_id: string;
 
+    @IsOptional()
+    @IsUUID('4')
+    property: string;
+
 }

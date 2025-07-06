@@ -12,6 +12,8 @@ import { ChangePasswordDto } from 'src/adapters/dtos/users/change-password.dto';
 import { GetUserUseCase } from 'src/application/usecases/get-user.usecase';
 import { FileService } from 'src/application/services/upload/file.service';
 import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.usecase';
+import { IUserVM } from 'src/application/vm-interfaces/user.vm-interface';
+import { UserVM } from 'src/adapters/vm/user.vm';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -32,6 +34,8 @@ export class UsersController {
 
         const users = await this.getAllUsersUseCase.execute(hoa_id);
 
+        const usersNoPassword: Omit<UserVM, 'password'>[] = []
+
         for await (const user of users) {
             const { images } = user
 
@@ -43,9 +47,14 @@ export class UsersController {
             }
 
             user.setImagesUrl(imagesUrls)
+
+            const { password, ...userNoPassword } = user
+
+            usersNoPassword.push(userNoPassword)
+
         }
 
-        return users
+        return usersNoPassword
 
     }
 
@@ -68,14 +77,19 @@ export class UsersController {
         }
 
         user.setImagesUrl(imagesUrls)
-        return user;
+
+        const { password, ...userNoPassword } = user
+
+        return userNoPassword;
 
     }
 
     @Patch(':id')
     @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN)
-    update(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string, @Body() dto: UpdateUserDto) {
-        return this.updateUseCase.execute(id, dto);
+    async update(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string, @Body() dto: UpdateUserDto) {
+        const user = await this.updateUseCase.execute(id, dto);
+        const { password, ...userNoPassword } = user as UserVM
+        return userNoPassword;
     }
 
     @Patch(':id/password')

@@ -9,4 +9,6 @@ export interface IIncidenceVM {
     images: string[];
     imagesUrls: string[];
     setImagesUrl: (imagesUrls: string[]) => void;
+    created: string;
+    updated: string;
 }

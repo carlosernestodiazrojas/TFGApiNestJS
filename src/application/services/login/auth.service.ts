@@ -17,11 +17,11 @@ export class AuthService {
         if (!user) throw new UnauthorizedException('Credenciales inválidas');
         const match = await bcrypt.compare(pass, user.password);
         if (!match) throw new UnauthorizedException('Credenciales inválidas');
-
         return user;
     }
 
-    async login(user: UserVM) {
+    async login(email: string, pass: string) {
+        const user = await this.validateUser(email, pass);
         const payload = { sub: user.id, email: user.email, role: user.role.name };
         return {
             access_token: this.jwtService.sign(payload),
@@ -38,7 +38,21 @@ export class AuthService {
     async refreshToken(userId: string) {
         const user = await this.userRepo.findById(userId);
         if (!user) throw new UnauthorizedException('Credenciales inválidas');
-        return this.login(user);
+        return this.loginAndRefresh(user);
     }
+
+    async loginAndRefresh(user: UserVM) {
+        const payload = { sub: user.id, email: user.email, role: user.role.name };
+        return {
+            access_token: this.jwtService.sign(payload),
+            email: user.email,
+            role: user.role.name,
+            user_id: user.id,
+            hoa_id: user.hoa ? user.hoa.id : null,
+            name: user.name,
+            last_name: user.last_name
+        };
+    }
+
 
 }

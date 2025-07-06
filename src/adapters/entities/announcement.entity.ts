@@ -42,7 +42,7 @@ export class Announcement implements AnnouncementModel {
     @JoinColumn({ name: 'hoa_id' })
     hoa: Hoa;
 
-    @OneToMany(() => FileRelation, relation => relation.announcement) // <-- CORRECCIÓN AQUÍ
+    @OneToMany(() => FileRelation, relation => relation.announcement)
     files: FileRelation[];
 
 
