@@ -10,4 +10,5 @@ export interface IHoaRepository {
     create(dto: ICreateHoaDto): Promise<IHoaVM>;
     update(id: string, dto: IUpdateHoaDto): Promise<IHoaVM>;
     delete(id: string): Promise<void>;
+    getPropertiesStatistics(hoaId: string): Promise<any>
 }

@@ -11,6 +11,7 @@ export class ChangePasswordUseCase {
 
     async execute(id: string, oldPass: string, newPass: string) {
         const user = await this.userRepo.findById(id);
+        if (!user) throw new BadRequestException('No se encuentra el usuario');
         const match = await bcrypt.compare(oldPass, user?.password);
         if (!match) throw new BadRequestException('Contraseña actual incorrecta');
         const hash = await bcrypt.hash(newPass, 10);

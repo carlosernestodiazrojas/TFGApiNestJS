@@ -28,11 +28,6 @@ export class RegisterUserUseCase {
         const hoaEntity = this.hoaRepo.findById(dto.hoa_id)
 
         const hash = await bcrypt.hash(dto.password, 10);
-        // return this.userRepo.create({
-        //     ...dto,
-        //     password: hash,
-        //     role: (dto.role as RoleName)
-        // });
 
         const user = await this.userRepo.create({
             ...dto,

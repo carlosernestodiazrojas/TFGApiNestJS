@@ -31,10 +31,16 @@ import { FileService } from 'src/application/services/upload/file.service';
 import { S3Service } from 'src/application/services/upload/s3.service';
 import { FileRelation } from 'src/adapters/entities/file_relations.entity';
 import { FileEntity } from 'src/adapters/entities/file.entity';
+import { CondominiumPropertyRepository } from 'src/adapters/repositories/condominium-property.repository';
+import { IPropertyRepositoryToken } from 'src/application/repository-interfaces/iproperty.repository-interface';
+import { Property } from 'src/adapters/entities/property.entity';
+import { ICondominiumRepositoryToken } from 'src/application/repository-interfaces/icondominium.repository-interface';
+import { CondominiumRepository } from 'src/adapters/repositories/condominium.repository';
+import { Condominium } from 'src/adapters/entities/condominium.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation]),
+        TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation, Property, Condominium]),
         PassportModule.register({ defaultStrategy: 'jwt' }),
 
         JwtModule.register({
@@ -47,6 +53,7 @@ import { FileEntity } from 'src/adapters/entities/file.entity';
         UserRepository,
         RoleRepository,
         HoaRepository,
+        CondominiumPropertyRepository,
         AuthService,
         LoginDto,
         RefreshTokenDto,
@@ -61,6 +68,14 @@ import { FileEntity } from 'src/adapters/entities/file.entity';
         {
             provide: IFileRelationRepositoryToken,
             useClass: FileRelationRepository,
+        },
+        {
+            provide: IPropertyRepositoryToken,
+            useClass: CondominiumPropertyRepository,
+        },
+        {
+            provide: ICondominiumRepositoryToken,
+            useClass: CondominiumRepository,
         },
         FileService,
         S3Service

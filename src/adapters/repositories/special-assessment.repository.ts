@@ -27,7 +27,9 @@ export class SpecialAssessmentRepository implements ISpecialAssessmentRepository
             assessment.total_amount,
             assessment.individual_amount,
             assessment.is_approved,
-            assessment.is_deleted
+            assessment.is_deleted,
+            assessment.created_at,
+            assessment.updated_at
         );
     }
 

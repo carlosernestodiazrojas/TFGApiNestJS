@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { Condominium } from './condominium.entity';
 import { PropertyModel } from 'src/domain/model-interfaces/property.model';
+import { User } from './user.entity';
 
 @Entity('properties')
 export class Property implements PropertyModel {
@@ -37,5 +38,8 @@ export class Property implements PropertyModel {
     @ManyToOne(() => Condominium, condominium => condominium.properties)
     @JoinColumn({ name: 'condominium_id' })
     condominium: Condominium;
+
+    @OneToOne(() => User, user => user.property)
+    user: User;
 
 }

@@ -8,6 +8,8 @@ export interface IAnnouncementVM {
     from: string;
     to: string;
     images: string[];
-    imagesUrls: string[]
-    setImagesUrl: (imagesUrls: string[]) => void
+    imagesUrls: string[];
+    setImagesUrl: (imagesUrls: string[]) => void;
+    created: string;
+    updated: string;
 }

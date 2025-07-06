@@ -24,7 +24,9 @@ export class CondominiumRepository implements ICondominiumRepository {
             condominium.name,
             condominium.description,
             condominium.address,
-            condominium.is_deleted
+            condominium.is_deleted,
+            condominium.created_at,
+            condominium.updated_at
         );
     }
 

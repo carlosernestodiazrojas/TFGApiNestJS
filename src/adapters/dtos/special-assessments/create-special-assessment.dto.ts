@@ -8,14 +8,6 @@ export class CreateSpecialAssessmentDto implements ICreateSpecialAssessmentDto {
     @IsBoolean()
     is_votable: boolean;
 
-    /* @IsNotEmpty()
-    @IsDecimal({ decimal_digits: '2' })
-    total_amount: number;
-
-    @IsNotEmpty()
-    @IsDecimal({ decimal_digits: '2' })
-    individual_amount: number; */
-
     @IsNotEmpty()
     @IsNumber({ maxDecimalPlaces: 2 })
     total_amount: number;

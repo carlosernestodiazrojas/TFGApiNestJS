@@ -18,12 +18,31 @@ import { S3Service } from "src/application/services/upload/s3.service";
 import { IFileRelationRepositoryToken } from "src/application/repository-interfaces/ifile-relation.repository-interface";
 import { FileRelationRepository } from "src/adapters/repositories/file-relation.repository";
 import { FileRelation } from "src/adapters/entities/file_relations.entity";
+import { GetUserUseCase } from "src/application/usecases/get-user.usecase";
+import { UserRepository } from "src/adapters/repositories/user.repository";
+import { IUserRepositoryToken } from "src/application/repository-interfaces/iuser.repository-interface";
+import { User } from "src/adapters/entities/user.entity";
+import { RoleRepository } from "src/adapters/repositories/role.repository";
+import { IRoleRepositoryToken } from "src/application/repository-interfaces/irole.repository-interface";
+import { Role } from "src/adapters/entities/role.entity";
+import { CondominiumPropertyRepository } from "src/adapters/repositories/condominium-property.repository";
+import { IPropertyRepositoryToken } from "src/application/repository-interfaces/iproperty.repository-interface";
+import { Property } from "src/adapters/entities/property.entity";
+import { CondominiumRepository } from "src/adapters/repositories/condominium.repository";
+import { ICondominiumRepositoryToken } from "src/application/repository-interfaces/icondominium.repository-interface";
+import { Condominium } from "src/adapters/entities/condominium.entity";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Hoa, FileEntity, FileRelation])],
+    imports: [TypeOrmModule.forFeature([Hoa, FileEntity, FileRelation, User, Role, Property, Condominium])],
     providers: [
         JwtService,
         RolesGuard,
+        UserRepository,
+        RoleRepository,
+        GetUserUseCase,
+        HoaRepository,
+        CondominiumPropertyRepository,
+        CondominiumRepository,
         HoaManagementUseCase,
         {
             provide: IHoaRepositoryToken,
@@ -36,6 +55,22 @@ import { FileRelation } from "src/adapters/entities/file_relations.entity";
         {
             provide: IFileRelationRepositoryToken,
             useClass: FileRelationRepository,
+        },
+        {
+            provide: IUserRepositoryToken,
+            useClass: UserRepository,
+        },
+        {
+            provide: IRoleRepositoryToken,
+            useClass: RoleRepository,
+        },
+        {
+            provide: IPropertyRepositoryToken,
+            useClass: CondominiumPropertyRepository,
+        },
+        {
+            provide: ICondominiumRepositoryToken,
+            useClass: CondominiumRepository,
         },
         CreateHoaDto,
         UpdateHoaDto,

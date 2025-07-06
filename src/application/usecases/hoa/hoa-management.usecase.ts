@@ -41,4 +41,9 @@ export class HoaManagementUseCase {
     }
 
 
+    async getPropertiesStatistics(hoaId: string) {
+        return await this.repo.getPropertiesStatistics(hoaId)
+    }
+
+
 }

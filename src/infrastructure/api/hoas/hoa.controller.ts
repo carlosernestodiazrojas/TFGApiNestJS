@@ -1,7 +1,10 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateHoaDto } from "src/adapters/dtos/hoas/create-hoa.dto";
 import { UpdateHoaDto } from "src/adapters/dtos/hoas/update-hoa.dto";
+import { HoaVM } from "src/adapters/vm/hoa.vm";
+import { UserVM } from "src/adapters/vm/user.vm";
 import { FileService } from "src/application/services/upload/file.service";
+import { GetUserUseCase } from "src/application/usecases/get-user.usecase";
 import { HoaManagementUseCase } from "src/application/usecases/hoa/hoa-management.usecase";
 import { Roles } from "src/common/decorators/roles.decorator";
 import { JwtAuthGuard } from "src/common/guards/jwt-auth.guard";
@@ -38,6 +41,11 @@ export class HoaController {
         }
 
         hoa.setImagesUrl(imagesUrls)
+
+        const statistics = await this.useCase.getPropertiesStatistics(hoa.id);
+
+        hoa.setStatistics(statistics)
+
         return hoa;
     }
 

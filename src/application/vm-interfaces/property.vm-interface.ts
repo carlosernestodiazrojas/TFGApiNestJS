@@ -6,4 +6,6 @@ export interface IPropertyVM {
     has_storage_room: boolean;
     has_parking_space: boolean;
     current_on_payments: boolean;
+    created: string;
+    updated: string;
 }
