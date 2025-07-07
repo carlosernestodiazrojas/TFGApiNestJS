@@ -69,8 +69,16 @@ export class CondominiumRepository implements ICondominiumRepository {
         const condominium = await this.repo.findOne({ where: { id } });
         if (!condominium) throw new NotFoundException('Edificio no encontrado');
 
-        if (dto.name || dto.address || dto.description)
-            await this.repo.update(id, dto);
+        if (dto.name || dto.address || dto.description) {
+            if (dto.name)
+                condominium.name = dto.name
+            if (dto.address)
+                condominium.address = dto.address
+            if (dto.description)
+                condominium.description = dto.description
+
+            await this.repo.save(condominium);
+        }
 
         const updated = await this.repo.findOne({ where: { id } });
         return this.toViewModel(updated as Condominium);
