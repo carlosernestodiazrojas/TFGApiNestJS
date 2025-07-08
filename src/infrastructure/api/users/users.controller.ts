@@ -14,6 +14,7 @@ import { FileService } from 'src/application/services/upload/file.service';
 import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.usecase';
 import { IUserVM } from 'src/application/vm-interfaces/user.vm-interface';
 import { UserVM } from 'src/adapters/vm/user.vm';
+import { ResetPasswordDto } from 'src/adapters/dtos/users/reset-password.dto';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -34,8 +35,6 @@ export class UsersController {
 
         const users = await this.getAllUsersUseCase.execute(hoa_id);
 
-        const usersNoPassword: Omit<UserVM, 'password'>[] = []
-
         for await (const user of users) {
             const { images } = user
 
@@ -48,13 +47,9 @@ export class UsersController {
 
             user.setImagesUrl(imagesUrls)
 
-            const { password, ...userNoPassword } = user
-
-            usersNoPassword.push(userNoPassword)
-
         }
 
-        return usersNoPassword
+        return users
 
     }
 
@@ -97,4 +92,11 @@ export class UsersController {
     changePassword(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string, @Body() body: ChangePasswordDto) {
         return this.changePwdUseCase.execute(id, body.oldPass, body.newPass);
     }
+
+    @Patch(':id/password_reset')
+    @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN, RoleName.PRESIDENT, RoleName.OWNER)
+    passwordReset(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string, @Body() body: ResetPasswordDto) {
+        return this.changePwdUseCase.forceChangePassword(id, body.newPass);
+    }
+
 }

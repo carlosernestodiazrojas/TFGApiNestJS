@@ -18,4 +18,13 @@ export class ChangePasswordUseCase {
         await this.userRepo.update(id, { password: hash });
         return { message: 'Contraseña actualizada' };
     }
+
+    async forceChangePassword(id: string, newPass: string) {
+        const user = await this.userRepo.findById(id);
+        if (!user) throw new BadRequestException('No se encuentra el usuario');
+        const hash = await bcrypt.hash(newPass, 10);
+        await this.userRepo.update(id, { password: hash });
+        return { message: 'Contraseña actualizada' };
+    }
+
 }

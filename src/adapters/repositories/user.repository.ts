@@ -65,7 +65,7 @@ export class UserRepository implements IUserRepository {
         const hoaEnt = await this.hoaRepo.findById(hoa_id);
         if (!hoaEnt) throw new NotFoundException('Comunidad no encontrada');
 
-        const ents = await this.repo.find({ relations: ['role', 'hoa', 'property'] });
+        const ents = await this.repo.find({ relations: ['role', 'hoa', 'property'], order: { name: 'asc' } });
 
         const usersHoa = ents.filter(e => e.hoa.id === hoa_id)
 
