@@ -8,6 +8,7 @@ export const ICommonAreaRepositoryToken = 'ICommonAreaRepository';
 export interface ICommonAreaRepository {
     findById(id: string): Promise<ICommonAreaVM | null>;
     findAll(condominium_id: string): Promise<ICommonAreaVM[]>;
+    findAllByHoa(hoa_id: string): Promise<ICommonAreaVM[]>;
     create(dto: ICreateCommonAreaDto): Promise<ICommonAreaVM>;
     update(id: string, dto: IUpdateCommonAreaDto): Promise<ICommonAreaVM>;
     delete(id: string): Promise<void>;

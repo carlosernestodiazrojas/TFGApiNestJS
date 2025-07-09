@@ -37,8 +37,28 @@ export class CommonAreaController {
         }
 
         return commonAreas
+    }
 
+    @Get('/allByHoa/:hoa_id')
+    @Roles('global_admin')
+    async findAllByHoa(@Param('hoa_id', new ParseUUIDPipe({ version: '4' })) hoa_id: string) {
 
+        const commonAreas = await this.useCase.findAllByHoa(hoa_id);
+
+        for await (const commonArea of commonAreas) {
+            const { images } = commonArea
+
+            const imagesUrls: string[] = []
+
+            for await (const imageId of images) {
+                const { url } = await this.fileService.getPresignedUrlById(imageId);
+                imagesUrls.push(url);
+            }
+
+            commonArea.setImagesUrl(imagesUrls)
+        }
+
+        return commonAreas
     }
 
     @Get(':id')

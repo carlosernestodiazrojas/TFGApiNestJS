@@ -50,6 +50,30 @@ export class CommonAreaRepository implements ICommonAreaRepository {
         return ents.map(e => this.toViewModel(e));
     }
 
+    async findAllByHoa(hoa_id: string): Promise<CommonAreaVM[]> {
+
+        const commonAreas = await this.repo.find({
+            relations: ['condominium', 'condominium.hoa'],
+            where: {
+                condominium: {
+                    hoa: {
+                        id: hoa_id
+                    }
+                }
+            }
+        });
+
+        return commonAreas.map(e => this.toViewModel(e));
+
+        // const ents = await this.repo.find({
+        //     where: { condominium: { id: condominium.id } },
+        //     relations: ['condominium'],
+        //     order: { created_at: 'desc' },
+        // });
+
+        // return ents.map(e => this.toViewModel(e));
+    }
+
     async create(dto: CreateCommonAreaDto): Promise<CommonAreaVM> {
 
         const { condominium_id } = dto

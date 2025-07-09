@@ -67,6 +67,28 @@ export class CommonAreaManagementUseCase {
 
     }
 
+    async findAllByHoa(hoa_id: string) {
+        const commonAreas = await this.repo.findAllByHoa(hoa_id)
+
+        const commonAreaIds = commonAreas.map(commonArea => commonArea.id);
+
+        const filesMap = await this.fileRelationRepo.findByRelationsIds('commonarea', commonAreaIds)
+
+        if (filesMap.size > 0)
+            for (const commonArea of commonAreas) {
+                let images = []
+                const fileImagesMap = filesMap.get(commonArea.id)
+
+                if (fileImagesMap) {
+                    images = fileImagesMap.map(image => image.file.id)
+                }
+
+                commonArea.images = images
+            }
+
+        return commonAreas
+    }
+
     async delete(id: string) {
         return await this.repo.delete(id)
     }
