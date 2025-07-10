@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { ICreateUserDto } from '../../application/dto-interfaces/users/create-user.dto-interface';
 import { IUpdateUserDto } from '../../application/dto-interfaces/users/update-user.dto-interface';
 import { IUserVM } from '../vm-interfaces/user.vm-interface';

@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateCondominiumPropertyDto } from "src/adapters/dtos/condominium-properties/create-condominium-property.dto";
 import { UpdateCondominiumPropertyDto } from "src/adapters/dtos/condominium-properties/update-condominium-property.dto";

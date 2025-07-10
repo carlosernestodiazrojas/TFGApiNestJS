@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { Inject, Injectable } from '@nestjs/common';
 import { ISpecialAssessmentRepository, ISpecialAssessmentRepositoryToken } from 'src/application/repository-interfaces/ispecial-assessment.repository-interface';
 import { ICreateSpecialAssessmentDto } from 'src/application/dto-interfaces/special-assessments/create-assessment.dto-interface';

@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { ICreateHoaMeetingDto } from '../../application/dto-interfaces/hoa-meeting/create-meeting.dto-interface';
 import { IUpdateHoaMeetingDto } from '../../application/dto-interfaces/hoa-meeting/update-meeting.dto-interface';
 import { IHoaMeetingVM } from '../vm-interfaces/hoa-meeting.vm-interface';

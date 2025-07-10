@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
 
 import { IsBoolean, IsNotEmpty, IsString, IsUUID, MaxLength, MinLength } from 'class-validator';
 import { ICreateHoaMeetingDto } from 'src/application/dto-interfaces/hoa-meeting/create-meeting.dto-interface';

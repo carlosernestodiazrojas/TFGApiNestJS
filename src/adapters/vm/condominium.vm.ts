@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { ICondominiumVM } from "src/application/vm-interfaces/condominium.vm-interface"
 
 export class CondominiumVM implements ICondominiumVM {

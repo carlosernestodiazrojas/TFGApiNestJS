@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateIncidenceDto } from "src/adapters/dtos/incidences/create-incidence.dto";
 import { UpdateIncidenceDto } from "src/adapters/dtos/incidences/update-incidence.dto";

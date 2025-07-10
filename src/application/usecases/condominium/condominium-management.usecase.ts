@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2025 Carlos Ernesto Diaz Rojas
+ * Licencia GPL-3.0 *
+ * Trabajo de fin de estudio
+ * Grado en Ingeniería informática, UNIR
+ */
+
 import { Inject, Injectable } from '@nestjs/common';
 import { ICondominiumRepository, ICondominiumRepositoryToken } from 'src/application/repository-interfaces/icondominium.repository-interface';
 import { IFileRelationRepository, IFileRelationRepositoryToken } from 'src/application/repository-interfaces/ifile-relation.repository-interface';
