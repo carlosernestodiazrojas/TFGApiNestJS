@@ -15,6 +15,7 @@ export class IUserVM {
     password: string;
     name: string;
     last_name: string;
+    active: boolean;
     role: IRoleVM;
     hoa: IHoaVM | null;
     property: IPropertyVM | null;

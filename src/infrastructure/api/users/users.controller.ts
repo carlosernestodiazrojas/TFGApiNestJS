@@ -19,9 +19,10 @@ import { ChangePasswordDto } from 'src/adapters/dtos/users/change-password.dto';
 import { GetUserUseCase } from 'src/application/usecases/get-user.usecase';
 import { FileService } from 'src/application/services/upload/file.service';
 import { GetAllUsersUseCase } from 'src/application/usecases/get-all-users.usecase';
-import { IUserVM } from 'src/application/vm-interfaces/user.vm-interface';
+
 import { UserVM } from 'src/adapters/vm/user.vm';
 import { ResetPasswordDto } from 'src/adapters/dtos/users/reset-password.dto';
+import { ToggleUserActiveUseCase } from 'src/application/usecases/toggle-active-user.usecase';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -33,7 +34,8 @@ export class UsersController {
         private changePwdUseCase: ChangePasswordUseCase,
         private getUserUseCase: GetUserUseCase,
         private getAllUsersUseCase: GetAllUsersUseCase,
-        private fileService: FileService
+        private fileService: FileService,
+        private toggleUserActiveUseCase: ToggleUserActiveUseCase
     ) { }
 
     @Get('/allByHoa/:hoa_id')
@@ -101,9 +103,15 @@ export class UsersController {
     }
 
     @Patch(':id/password_reset')
-    @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN, RoleName.PRESIDENT, RoleName.OWNER)
+    @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN)
     passwordReset(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string, @Body() body: ResetPasswordDto) {
         return this.changePwdUseCase.forceChangePassword(id, body.newPass);
+    }
+
+    @Patch(':id/toggle_active')
+    @Roles(RoleName.GLOBAL_ADMIN, RoleName.ADMIN)
+    toogleActive(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+        return this.toggleUserActiveUseCase.execute(id);
     }
 
 }

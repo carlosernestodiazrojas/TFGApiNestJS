@@ -25,6 +25,9 @@ export class UpdateUserDto implements IUpdateUserDto {
     last_name?: string;
 
     @IsOptional()
+    active?: boolean;
+
+    @IsOptional()
     @IsEnum(RoleName)
     role?: RoleName;
 

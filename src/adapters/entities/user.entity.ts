@@ -67,4 +67,9 @@ export class User implements UserModel {
     @JoinColumn({ name: 'hoa_id' })
     hoa: Hoa;
 
+    @Column({
+        default: true
+    })
+    active: boolean;
+
 }

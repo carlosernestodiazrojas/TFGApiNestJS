@@ -19,5 +19,6 @@ export interface UserModel {
     last_name: string;
     role: RoleModel;
     hoa: HoaModel;
-    property: PropertyModel
+    property: PropertyModel;
+    active: boolean;
 }

@@ -17,6 +17,7 @@ export class UserVM implements IUserVM {
         password: string,
         name: string,
         last_name: string,
+        active: boolean,
         role: RoleVM,
         hoa: HoaVM | null,
         property: PropertyVM | null
@@ -25,18 +26,20 @@ export class UserVM implements IUserVM {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.hoa = hoa
+        this.hoa = hoa;
         this.name = name;
-        this.last_name = last_name
-        this.images = []
-        this.imagesUrls = []
-        this.property = property
+        this.last_name = last_name;
+        this.images = [];
+        this.imagesUrls = [];
+        this.property = property;
+        this.active = active;
     }
     id: string;
     email: string;
     password: string;
     name: string;
     last_name: string;
+    active: boolean;
     role: RoleVM;
     hoa: HoaVM | null;
     property: PropertyVM | null;

@@ -35,6 +35,7 @@ import { Property } from 'src/adapters/entities/property.entity';
 import { CondominiumRepository } from 'src/adapters/repositories/condominium.repository';
 import { Condominium } from 'src/adapters/entities/condominium.entity';
 import { IPropertyRepositoryToken } from 'src/application/repository-interfaces/iproperty.repository-interface';
+import { ToggleUserActiveUseCase } from 'src/application/usecases/toggle-active-user.usecase';
 
 @Module({
     imports: [TypeOrmModule.forFeature([User, Role, Hoa, FileEntity, FileRelation, Condominium, Property])],
@@ -50,6 +51,7 @@ import { IPropertyRepositoryToken } from 'src/application/repository-interfaces/
         GetUserUseCase,
         GetAllUsersUseCase,
         ChangePasswordUseCase,
+        ToggleUserActiveUseCase,
         {
             provide: IRoleRepositoryToken,
             useClass: RoleRepository,
