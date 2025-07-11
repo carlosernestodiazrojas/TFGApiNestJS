@@ -40,6 +40,7 @@ export class UserRepository implements IUserRepository {
             user.password,
             user.name,
             user.last_name,
+            user.active,
             new RoleVM(user.role.id, user.role.code, user.role.name as RoleName),
             user.hoa ? new HoaVM(user.hoa.id, user.hoa.name, user.hoa.address, user.hoa.president_id, user.hoa.admin_id) : null,
             user.property ? new PropertyVM(
@@ -147,4 +148,17 @@ export class UserRepository implements IUserRepository {
         const updated = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
         return this.toViewModel(updated as User);
     }
+
+    async toggleActive(id: string): Promise<UserVM> {
+
+        const user = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
+        if (!user) throw new NotFoundException('Usuario no encontrado');
+
+        user.active = !user.active
+        await this.repo.save(user)
+
+        const updated = await this.repo.findOne({ where: { id }, relations: ['role', 'hoa'] });
+        return this.toViewModel(updated as User);
+    }
+
 }

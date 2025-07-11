@@ -17,4 +17,5 @@ export interface IUserRepository {
     findAll(hoa_id: string): Promise<IUserVM[]>;
     create(dto: ICreateUserDto): Promise<IUserVM>;
     update(id: string, dto: IUpdateUserDto): Promise<IUserVM>;
+    toggleActive(id: string): Promise<IUserVM>;
 }

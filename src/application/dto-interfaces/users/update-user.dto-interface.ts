@@ -4,9 +4,10 @@ export interface IUpdateUserDto {
     email?: string;
     password?: string;
     role?: RoleName;
-    name?: string
-    last_name?: string
-    hoa_id?: string
-    file_id?: string
-    property?: string
+    name?: string;
+    last_name?: string;
+    hoa_id?: string;
+    file_id?: string;
+    property?: string;
+    active?: boolean;
 }
