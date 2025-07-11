@@ -42,7 +42,9 @@ const mockAnnouncementVM: AnnouncementVM = new AnnouncementVM(
     mockAnnouncement.description,
     mockAnnouncement.is_deleted,
     mockAnnouncement.from,
-    mockAnnouncement.to
+    mockAnnouncement.to,
+    mockAnnouncement.created_at,
+    mockAnnouncement.updated_at
 );
 
 describe('AnnouncementRepository', () => {
@@ -119,7 +121,11 @@ describe('AnnouncementRepository', () => {
             jest.spyOn(announcementRepoMock, 'findOne').mockResolvedValue(mockAnnouncement);
             const result = await repository.findById(ANNOUNCEMENT_ID);
             expect(result).toEqual(mockAnnouncementVM);
-            expect(announcementRepoMock.findOne).toHaveBeenCalledWith({ where: { id: ANNOUNCEMENT_ID } });
+            
+            expect(announcementRepoMock.findOne).toHaveBeenCalledWith({ 
+                where: { id: ANNOUNCEMENT_ID },
+                relations: ['files'] 
+            });
         });
 
         it('Debe lanzar NotFoundException si el anuncio no existe', async () => {

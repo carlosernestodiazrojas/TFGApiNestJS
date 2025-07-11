@@ -18,6 +18,7 @@ import {
 } from 'src/adapters/dtos/announcements/update-announcement.dto';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/common/guards/roles.guard';
+import { FileService } from 'src/application/services/upload/file.service';
 
 const HOA_ID = 'cf35a93a-8753-4803-a24e-5e927a4a9563';
 
@@ -33,6 +34,14 @@ describe('AnnouncementController', () => {
         delete: jest.fn(),
     };
 
+    const mockFileService = {
+        uploadFile: jest.fn(),
+        deleteFile: jest.fn(),
+        getFileUrl: jest.fn(),
+        validateFile: jest.fn(),
+        getPresignedUrlById: jest.fn().mockResolvedValue({ url: 'https://example.com/file.jpg' }),
+    };
+
     beforeEach(async () => {
 
         jest.clearAllMocks();
@@ -43,6 +52,10 @@ describe('AnnouncementController', () => {
                 {
                     provide: AnnouncementManagementUseCase,
                     useValue: mockUseCase,
+                },
+                {
+                    provide: FileService,
+                    useValue: mockFileService,
                 },
             ],
         })
@@ -80,6 +93,17 @@ describe('AnnouncementController', () => {
             const hoaId = 'f82a1b94-8857-4b68-b391-4e7a3d2e9c1c';
             const limit = 10;
             const offset = 0;
+            
+            const mockAnnouncements = [
+                {
+                    id: '1',
+                    title: 'Test Announcement',
+                    images: ['image1', 'image2'],
+                    setImagesUrl: jest.fn()
+                }
+            ];
+            mockUseCase.findAll.mockResolvedValue(mockAnnouncements);
+            
             await controller.findAll(hoaId, limit, offset);
             expect(useCaseMock.findAll).toHaveBeenCalledWith(hoaId, limit, offset);
         });
@@ -88,6 +112,15 @@ describe('AnnouncementController', () => {
     describe('findById', () => {
         it('Debe llamar a useCase.findById con el ID recibido', async () => {
             const announcementId = 'f82a1b94-8857-4b68-b391-4e7a3d2e9c1c';
+            
+            const mockAnnouncement = {
+                id: announcementId,
+                title: 'Test Announcement',
+                images: ['image1'],
+                setImagesUrl: jest.fn()
+            };
+            mockUseCase.findById.mockResolvedValue(mockAnnouncement);
+            
             await controller.findById(announcementId);
             expect(useCaseMock.findById).toHaveBeenCalledWith(announcementId);
         });
