@@ -33,8 +33,8 @@ Si no tienes estos servicios configurados, puedes seguir las guías oficiales:
 
 1. **Clona el repositorio**
    ```bash
-   git clone [URL_DEL_REPOSITORIO]
-   cd [NOMBRE_DEL_PROYECTO]
+   git clone https://github.com/carlosernestodiazrojas/TFGApiNestJS.git
+   cd TFGApiNestJS
    ```
 
 2. **Configura las variables de entorno**
